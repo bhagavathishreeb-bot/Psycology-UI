@@ -5,33 +5,37 @@
 }
 
 .booking-fullpage-header {
-  padding: 0 0 20px;
-  margin-bottom: 24px;
-  border-bottom: 2px solid rgba(123, 168, 123, 0.25);
+  padding: 0 0 24px;
+  margin-bottom: 28px;
+  border-bottom: 2px solid rgba(123, 168, 123, 0.2);
 }
 
 .booking-fullpage-header h2 {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 700;
-  color: var(--mano-primary-dark);
+  background: linear-gradient(135deg, var(--mano-primary-dark) 0%, var(--mano-primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin: 0;
-  letter-spacing: -0.3px;
+  letter-spacing: -0.4px;
 }
 
 .booking-form-fullpage {
   padding: 0;
   background: transparent;
   width: 100%;
+  overflow-x: hidden;
 }
 
 .booking-form-fullpage .form-section {
   margin-bottom: 24px;
   width: 100%;
-  padding: 24px 28px;
-  background: rgba(255, 255, 255, 0.85);
-  border-radius: 14px;
-  box-shadow: 0 2px 12px rgba(123, 168, 123, 0.08);
-  border: 1px solid rgba(123, 168, 123, 0.15);
+  padding: 28px 32px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(253, 248, 249, 0.92) 100%);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(123, 168, 123, 0.08), 0 0 0 1px rgba(232, 160, 184, 0.12);
+  border: 1px solid rgba(123, 168, 123, 0.2);
 }
 
 .booking-form-fullpage .form-section label {
@@ -68,6 +72,13 @@
 .booking-form-fullpage .checkbox-group {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px 20px;
+}
+
+@media (max-width: 600px) {
+  .booking-form-fullpage .checkbox-group {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
 }
 
 .booking-modal-overlay {
@@ -149,15 +160,16 @@
   font-size: 16px;
   font-weight: 600;
   color: var(--mano-primary-dark);
-  margin: 0 0 16px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgba(123, 168, 123, 0.25);
+  margin: 0 0 18px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(123, 168, 123, 0.2);
   letter-spacing: -0.2px;
 }
 
 .booking-form-fullpage .form-section h3 {
-  font-size: 15px;
-  margin: 0 0 18px;
+  font-size: 16px;
+  margin: 0 0 20px;
+  padding-bottom: 14px;
 }
 
 .form-grid {
@@ -209,19 +221,20 @@
 .booking-form input[type="time"],
 .booking-form select,
 .booking-form textarea {
-  padding: 12px 14px;
-  border: 1px solid rgba(123, 168, 123, 0.25);
-  border-radius: 10px;
+  padding: 12px 16px;
+  border: 1px solid rgba(123, 168, 123, 0.3);
+  border-radius: 12px;
   font-size: 14px;
   font-family: inherit;
   transition: all 0.2s ease;
   background: #fff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
 }
 
 .booking-form-fullpage input,
 .booking-form-fullpage select {
-  padding: 10px 12px;
+  padding: 12px 16px;
+  border-radius: 12px;
 }
 
 .booking-form input:hover,
@@ -274,6 +287,8 @@
   padding: 10px 12px;
   border-radius: 8px;
   transition: background 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 44px;
 }
 
 .checkbox-label:hover {
@@ -342,16 +357,16 @@
 
 .form-actions {
   display: flex;
-  gap: 14px;
+  gap: 16px;
   justify-content: flex-end;
-  padding-top: 24px;
-  margin-top: 8px;
-  border-top: 1px solid rgba(123, 168, 123, 0.2);
+  padding-top: 28px;
+  margin-top: 12px;
+  border-top: 2px solid rgba(123, 168, 123, 0.15);
 }
 
 .booking-form-fullpage .form-actions {
-  padding-top: 24px;
-  margin-top: 8px;
+  padding-top: 28px;
+  margin-top: 12px;
 }
 
 .btn-cancel {
@@ -388,4 +403,347 @@
   background: linear-gradient(135deg, var(--mano-primary-dark) 0%, var(--mano-primary) 100%);
   box-shadow: 0 6px 20px rgba(123, 168, 123, 0.4);
   transform: translateY(-1px);
+}
+
+/* Payment section */
+.payment-section {
+  margin-top: 28px;
+  padding: 28px 32px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(253, 248, 249, 0.95) 100%);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(123, 168, 123, 0.1), 0 0 0 1px rgba(232, 160, 184, 0.15);
+  border: 1px solid rgba(123, 168, 123, 0.2);
+}
+
+.payment-checkbox-label {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  margin-bottom: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--mano-text);
+}
+
+.payment-checkbox-label input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--mano-primary);
+}
+
+.btn-discount-code {
+  padding: 12px 20px;
+  border: 2px dashed rgba(123, 168, 123, 0.4);
+  background: rgba(245, 249, 245, 0.6);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--mano-primary);
+  margin-bottom: 24px;
+  transition: all 0.2s;
+}
+
+.btn-discount-code:hover {
+  background: rgba(184, 224, 210, 0.4);
+  border-color: var(--mano-primary);
+}
+
+.discount-input-wrap {
+  margin-bottom: 24px;
+}
+
+.discount-input {
+  padding: 12px 16px;
+  border: 1px solid rgba(123, 168, 123, 0.3);
+  border-radius: 10px;
+  font-size: 14px;
+  width: 100%;
+  max-width: 220px;
+  background: #fff;
+}
+
+.order-summary-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(123, 168, 123, 0.08);
+  border: 1px solid rgba(184, 224, 210, 0.5);
+  margin-bottom: 20px;
+}
+
+.order-summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid rgba(123, 168, 123, 0.2);
+}
+
+.order-summary-header h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--mano-primary-dark);
+  letter-spacing: -0.2px;
+}
+
+.order-summary-amount {
+  font-size: 20px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--mano-primary) 0%, var(--mano-green) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.order-summary-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.order-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--mano-text);
+  line-height: 1.5;
+}
+
+.order-row > span:first-child {
+  flex: 1;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.order-row > span:last-child {
+  flex-shrink: 0;
+}
+
+.order-row .info-icon {
+  margin-left: 4px;
+  opacity: 0.6;
+  cursor: help;
+  font-size: 12px;
+}
+
+.platform-fee-free {
+  color: var(--mano-primary);
+  font-weight: 600;
+}
+
+.platform-fee-free s {
+  color: var(--mano-text-muted);
+  margin-right: 6px;
+}
+
+.order-total {
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--mano-primary-dark);
+  padding-top: 16px;
+  margin-top: 8px;
+  border-top: 2px solid rgba(123, 168, 123, 0.2);
+}
+
+.payment-security {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, rgba(245, 249, 245, 0.8) 0%, rgba(250, 218, 221, 0.4) 100%);
+  border-radius: 12px;
+  font-size: 13px;
+  color: var(--mano-text-muted);
+  border: 1px solid rgba(123, 168, 123, 0.15);
+}
+
+.security-icon {
+  font-size: 16px;
+}
+
+.legal-links {
+  margin-left: auto;
+}
+
+.legal-links a {
+  color: var(--mano-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.legal-links a:hover {
+  text-decoration: underline;
+}
+
+.form-actions-payment {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.payment-sticky-summary {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.payment-price {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--mano-primary-dark);
+}
+
+.payment-original {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--mano-text-muted);
+  text-decoration: line-through;
+  margin-left: 10px;
+}
+
+.btn-confirm-pay {
+  padding: 14px 32px;
+  border: none;
+  background: linear-gradient(135deg, var(--mano-primary) 0%, var(--mano-green) 100%);
+  color: white;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 16px rgba(123, 168, 123, 0.4);
+}
+
+.btn-confirm-pay:hover {
+  background: linear-gradient(135deg, var(--mano-primary-dark) 0%, var(--mano-primary) 100%);
+  box-shadow: 0 6px 20px rgba(123, 168, 123, 0.45);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+  .form-actions-payment {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .payment-sticky-summary {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .payment-price {
+    text-align: center;
+  }
+
+  .btn-confirm-pay {
+    width: 100%;
+    min-height: 48px;
+    padding: 16px 24px;
+  }
+
+  .btn-cancel {
+    min-height: 48px;
+  }
+}
+
+@media (max-width: 600px) {
+  .booking-fullpage-header {
+    padding: 0 0 20px;
+    margin-bottom: 20px;
+  }
+
+  .booking-fullpage-header h2 {
+    font-size: 22px;
+  }
+
+  .booking-form-fullpage .form-section {
+    padding: 20px 20px;
+    margin-bottom: 18px;
+    border-radius: 14px;
+  }
+
+  .booking-form-fullpage .form-section h3 {
+    font-size: 15px;
+    margin-bottom: 16px;
+  }
+
+  .payment-section {
+    padding: 20px 20px;
+    margin-top: 20px;
+    border-radius: 14px;
+  }
+
+  .order-summary-card {
+    padding: 18px;
+  }
+
+  .order-summary-header h3 {
+    font-size: 15px;
+  }
+
+  .order-summary-amount {
+    font-size: 18px;
+  }
+
+  .order-row {
+    font-size: 13px;
+  }
+
+  .order-total {
+    font-size: 15px;
+  }
+
+  .payment-security {
+    padding: 12px 14px;
+    font-size: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .legal-links {
+    margin-left: 0;
+  }
+
+  .discount-input {
+    max-width: 100%;
+  }
+
+  .form-actions {
+    padding-top: 20px;
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 380px) {
+  .booking-form-fullpage .form-section,
+  .payment-section {
+    padding: 16px;
+  }
+
+  .booking-fullpage-header h2 {
+    font-size: 20px;
+  }
+
+  .payment-price {
+    font-size: 20px;
+  }
+
+  .btn-confirm-pay,
+  .btn-cancel {
+    font-size: 14px;
+    padding: 14px 20px;
+  }
 }

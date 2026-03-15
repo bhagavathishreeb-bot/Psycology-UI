@@ -47,7 +47,16 @@ export const CONFIG = {
       title: 'Counseling Session',
       rating: 4.9,
       price: 599,
+      originalPrice: 799,
       popular: true,
+      description: 'A 1:1 counseling session grounded in empathy, psychological understanding, and a non-judgmental space. We will explore your thoughts, emotions, and patterns to foster self-awareness and emotional clarity.',
+      whatToExpect: [
+        'Conversation grounded in psychological principles',
+        'Exploration of thoughts, emotions, and behavior patterns',
+        'Space to reflect on childhood experiences and their current impact',
+        'Dream exploration as a doorway to unconscious material',
+        'Increased clarity around life choices, conflicts, and inner conflicts',
+      ],
     },
   ],
 

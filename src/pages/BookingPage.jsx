@@ -9,6 +9,8 @@ export default function BookingPage() {
   const navigate = useNavigate()
   const session = location.state?.session ?? CONFIG.sessions?.[0] ?? null
   const [submitted, setSubmitted] = useState(false)
+  const [testimonialIndex, setTestimonialIndex] = useState(0)
+  const testimonials = CONFIG.reviews?.slice(0, 4) ?? []
 
   const handleSubmit = (data) => {
     console.log('Booking submitted:', data)
@@ -40,17 +42,78 @@ export default function BookingPage() {
 
   return (
     <div className="booking-page-layout">
-      <div className="booking-page-header">
-        <button type="button" className="back-link" onClick={() => navigate(-1)} aria-label="Go back">
-          ← Back
-        </button>
+      <div className="booking-two-panel">
+        {/* Left panel - Session details */}
+        <aside className="booking-session-details">
+          <button type="button" className="back-link" onClick={() => navigate(-1)} aria-label="Go back">
+            ← {CONFIG.name}
+          </button>
+          <div className="session-rating">
+            <span className="star">★</span> {session.rating}
+          </div>
+          <div className="session-header-row">
+            <h1 className="session-title">{session.title} ({session.duration})</h1>
+            <img src="/Me.jpeg" alt={CONFIG.name} className="session-profile-img" />
+          </div>
+          <div className="session-price-row">
+            <span className="price-current">₹{session.price}</span>
+            {session.originalPrice && (
+              <span className="price-original">₹{session.originalPrice}</span>
+            )}
+            <span className="session-duration">
+              <span className="duration-icon">🕐</span> {session.duration}
+            </span>
+          </div>
+          {session.description && (
+            <p className="session-description">{session.description}</p>
+          )}
+          {session.whatToExpect && session.whatToExpect.length > 0 && (
+            <div className="session-what-to-expect">
+              <h3>What to Expect</h3>
+              <ul>
+                {session.whatToExpect.map((item, i) => (
+                  <li key={i}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {testimonials.length > 0 && (
+            <div className="session-testimonials">
+              <h3>Testimonials</h3>
+              <div className="testimonial-card">
+                <p className="testimonial-text">"{testimonials[testimonialIndex]?.text}"</p>
+                <span className="testimonial-name">— {testimonials[testimonialIndex]?.name}</span>
+              </div>
+              <div className="testimonial-nav">
+                <button
+                  type="button"
+                  aria-label="Previous"
+                  onClick={() => setTestimonialIndex((i) => (i === 0 ? testimonials.length - 1 : i - 1))}
+                >
+                  ←
+                </button>
+                <button
+                  type="button"
+                  aria-label="Next"
+                  onClick={() => setTestimonialIndex((i) => (i === testimonials.length - 1 ? 0 : i + 1))}
+                >
+                  →
+                </button>
+              </div>
+            </div>
+          )}
+        </aside>
+
+        {/* Right panel - Form */}
+        <main className="booking-form-panel">
+          <BookingForm
+            session={session}
+            fullPage
+            onSubmit={handleSubmit}
+            onClose={() => navigate('/')}
+          />
+        </main>
       </div>
-      <BookingForm
-        session={session}
-        fullPage
-        onSubmit={handleSubmit}
-        onClose={() => navigate('/')}
-      />
     </div>
   )
 }

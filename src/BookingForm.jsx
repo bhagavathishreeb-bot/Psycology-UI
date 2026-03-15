@@ -34,6 +34,13 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage }) {
     previousDiagnosis: '',
     diagnosisDuration: '',
   })
+  const [receiveOnPhone, setReceiveOnPhone] = useState(true)
+  const [showDiscountInput, setShowDiscountInput] = useState(false)
+  const [discountCode, setDiscountCode] = useState('')
+
+  const sessionPrice = session?.price ?? 0
+  const platformFee = 10
+  const total = sessionPrice
 
   const update = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
@@ -62,7 +69,7 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage }) {
     return (
       <div className="booking-fullpage">
         <div className="booking-fullpage-header">
-          <h2>Book Session — {session?.title} (₹{session?.price})</h2>
+          <h2>Complete your booking</h2>
         </div>
         <form className="booking-form booking-form-fullpage" onSubmit={handleSubmit}>
           <div className="form-section">
@@ -132,30 +139,6 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage }) {
                   <option value="Non-binary">Non-binary</option>
                   <option value="Prefer not to say">Prefer not to say</option>
                 </select>
-              </label>
-            </div>
-          </div>
-
-          <div className="form-section">
-            <h3>Session Booking</h3>
-            <div className="form-grid">
-              <label>
-                Preferred Date <span className="required">*</span>
-                <input
-                  type="date"
-                  required
-                  value={formData.bookingDate}
-                  onChange={(e) => update('bookingDate', e.target.value)}
-                />
-              </label>
-              <label>
-                Preferred Time <span className="required">*</span>
-                <input
-                  type="time"
-                  required
-                  value={formData.bookingTime}
-                  onChange={(e) => update('bookingTime', e.target.value)}
-                />
               </label>
             </div>
           </div>
@@ -291,13 +274,84 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage }) {
             )}
           </div>
 
-          <div className="form-actions">
+          <div className="payment-section">
+            <label className="payment-checkbox-label">
+              <input
+                type="checkbox"
+                checked={receiveOnPhone}
+                onChange={(e) => setReceiveOnPhone(e.target.checked)}
+              />
+              <span>Receive booking details on phone</span>
+            </label>
+            <button
+              type="button"
+              className="btn-discount-code"
+              onClick={() => setShowDiscountInput(!showDiscountInput)}
+            >
+              Add Discount Code
+            </button>
+            {showDiscountInput && (
+              <div className="discount-input-wrap">
+                <input
+                  type="text"
+                  value={discountCode}
+                  onChange={(e) => setDiscountCode(e.target.value)}
+                  placeholder="Enter code"
+                  className="discount-input"
+                />
+              </div>
+            )}
+
+            <div className="order-summary-card">
+              <div className="order-summary-header">
+                <h3>Order Summary</h3>
+                <span className="order-summary-amount">₹{sessionPrice.toLocaleString('en-IN')}</span>
+              </div>
+              <div className="order-summary-rows">
+                <div className="order-row">
+                  <span>1 × {session?.title} ({session?.duration})</span>
+                  <span>₹{sessionPrice.toLocaleString('en-IN')}</span>
+                </div>
+                <div className="order-row">
+                  <span>
+                    Platform fee
+                    <span className="info-icon" title="Platform fee waived">ⓘ</span>
+                  </span>
+                  <span className="platform-fee-free">
+                    <s>₹{platformFee}</s> FREE
+                  </span>
+                </div>
+                <div className="order-row order-total">
+                  <span>Total</span>
+                  <span>₹{total.toLocaleString('en-IN')}</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="payment-security">
+              <span className="security-icon">🔒</span>
+              <span>Payments are 100% secure & encrypted</span>
+              <span className="legal-links">
+                <a href="/terms">Terms</a> | <a href="/privacy">Privacy</a>
+              </span>
+            </div>
+          </div>
+
+          <div className="form-actions form-actions-payment">
             <button type="button" className="btn-cancel" onClick={fullPage ? () => onClose?.() : onClose}>
               {fullPage ? 'Back to Home' : 'Cancel'}
             </button>
-            <button type="submit" className="btn-submit">
-              Submit Booking
-            </button>
+            <div className="payment-sticky-summary">
+              <span className="payment-price">
+                ₹{total.toLocaleString('en-IN')}
+                {session?.originalPrice && (
+                  <span className="payment-original">₹{session.originalPrice.toLocaleString('en-IN')}</span>
+                )}
+              </span>
+              <button type="submit" className="btn-confirm-pay">
+                Confirm and Pay
+              </button>
+            </div>
           </div>
         </form>
       </div>
@@ -381,30 +435,6 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage }) {
                   <option value="Non-binary">Non-binary</option>
                   <option value="Prefer not to say">Prefer not to say</option>
                 </select>
-              </label>
-            </div>
-          </div>
-
-          <div className="form-section">
-            <h3>Session Booking</h3>
-            <div className="form-grid">
-              <label>
-                Preferred Date <span className="required">*</span>
-                <input
-                  type="date"
-                  required
-                  value={formData.bookingDate}
-                  onChange={(e) => update('bookingDate', e.target.value)}
-                />
-              </label>
-              <label>
-                Preferred Time <span className="required">*</span>
-                <input
-                  type="time"
-                  required
-                  value={formData.bookingTime}
-                  onChange={(e) => update('bookingTime', e.target.value)}
-                />
               </label>
             </div>
           </div>
