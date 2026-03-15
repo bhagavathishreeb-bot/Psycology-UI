@@ -74,10 +74,18 @@
   gap: 12px 20px;
 }
 
+@media (max-width: 900px) {
+  .booking-form-fullpage .checkbox-group {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 16px;
+  }
+}
+
 @media (max-width: 600px) {
   .booking-form-fullpage .checkbox-group {
     grid-template-columns: 1fr;
-    gap: 10px;
+    gap: 12px;
+    margin-bottom: 14px;
   }
 }
 
@@ -284,21 +292,32 @@
   align-items: center;
   gap: 12px;
   cursor: pointer;
-  padding: 10px 12px;
+  padding: 12px 14px;
   border-radius: 8px;
   transition: background 0.2s;
   -webkit-tap-highlight-color: transparent;
   min-height: 44px;
+  min-width: 0;
+}
+
+.checkbox-label input {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  accent-color: var(--mano-primary);
+}
+
+.checkbox-label span {
+  flex: 1;
+  min-width: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  line-height: 1.4;
 }
 
 .checkbox-label:hover {
   background: rgba(245, 249, 245, 0.5);
-}
-
-.checkbox-label input {
-  width: 18px;
-  height: 18px;
-  accent-color: var(--mano-primary);
 }
 
 .other-concern {
