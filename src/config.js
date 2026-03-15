@@ -30,6 +30,14 @@ export const CONFIG = {
   // Replace with your actual booking URL (Calendly, Topmate, etc.)
   bookingUrl: 'https://calendly.com/your-link',
 
+  // Career openings
+  careers: [
+    { id: 1, title: 'Junior Psychologist', type: 'Full-time', location: 'Remote', description: 'Support counseling sessions, assist with assessments, and work with senior psychologists.' },
+    { id: 2, title: 'Mid-level Psychologist', type: 'Full-time', location: 'Remote', description: 'Lead counseling sessions, conduct assessments, and mentor junior team members.' },
+    { id: 3, title: 'Senior Psychologist', type: 'Full-time', location: 'Remote', description: 'Oversee clinical work, develop programs, and provide expert guidance.' },
+    { id: 4, title: 'Video Grapher', type: 'Contract / Part-time', location: 'Remote', description: 'Create mental wellness content, edit videos for courses and social media.' },
+  ],
+
   // Counseling sessions - customize pricing and details
   sessions: [
     {
@@ -50,23 +58,23 @@ export const CONFIG = {
     testimonials: '245',
   },
 
-  // Courses - for Courses page
+  // Courses - for Courses page (images from Picsum Photos, free to use)
   courses: [
-    { id: 1, title: 'CBT Masterclass', subtitle: 'Cognitive Behavioral Therapy Fundamentals', price: 149, originalPrice: 299, flashSale: true },
-    { id: 2, title: 'Emotion Regulation Master Class Part 1', subtitle: 'Understanding Your Emotions', price: 99, originalPrice: 199, flashSale: true },
-    { id: 3, title: 'Emotion Regulation Master Class Part 2', subtitle: 'Managing Emotional Triggers', price: 99, originalPrice: 199, flashSale: true },
-    { id: 4, title: 'Emotion Regulation Master Class Part 3', subtitle: 'Building Emotional Resilience', price: 99, originalPrice: 199, flashSale: true },
-    { id: 5, title: 'Master Your Mind Course', subtitle: 'Complete Mental Wellness Toolkit', price: 199, originalPrice: 499, flashSale: true },
+    { id: 1, title: 'CBT Masterclass', subtitle: 'Cognitive Behavioral Therapy Fundamentals', price: 149, originalPrice: 299, rating: 4.9, ratingsCount: '308', hours: '12', image: 'https://picsum.photos/seed/psychology1/400/300' },
+    { id: 2, title: 'Emotion Regulation Master Class Part 1', subtitle: 'Understanding Your Emotions', price: 99, originalPrice: 199, rating: 4.8, ratingsCount: '245', hours: '8', image: 'https://picsum.photos/seed/wellness2/400/300' },
+    { id: 3, title: 'Emotion Regulation Master Class Part 2', subtitle: 'Managing Emotional Triggers', price: 99, originalPrice: 199, rating: 4.7, ratingsCount: '198', hours: '6', image: 'https://picsum.photos/seed/meditation3/400/300' },
+    { id: 4, title: 'Emotion Regulation Master Class Part 3', subtitle: 'Building Emotional Resilience', price: 99, originalPrice: 199, rating: 4.8, ratingsCount: '176', hours: '7', image: 'https://picsum.photos/seed/calm4/400/300' },
+    { id: 5, title: 'Master Your Mind Course', subtitle: 'Complete Mental Wellness Toolkit', price: 199, originalPrice: 499, rating: 4.9, ratingsCount: '412', hours: '18', image: 'https://picsum.photos/seed/mind5/400/300' },
   ],
 
-  // Shop items - for Shop page
+  // Shop items - for Shop page (images from Picsum Photos, free to use)
   shopItems: [
-    { id: 1, title: 'Mental Wellness Journal', type: 'Journal', price: 149, originalPrice: 249, flashSale: true },
-    { id: 2, title: 'Anxiety & Calm Workbook', type: 'Book', price: 199, originalPrice: 349, flashSale: true },
-    { id: 3, title: 'Gratitude & Reflection Journal', type: 'Journal', price: 129, originalPrice: 199, flashSale: true },
-    { id: 4, title: 'Psychology of Emotions', type: 'Book', price: 179, originalPrice: 299, flashSale: true },
-    { id: 5, title: 'Daily Mindfulness Planner', type: 'Journal', price: 99, originalPrice: 179, flashSale: true },
-    { id: 6, title: 'Self-Care Guidebook', type: 'Book', price: 159, originalPrice: 279, flashSale: true },
+    { id: 1, title: 'Mental Wellness Journal', type: 'Journal', price: 149, originalPrice: 249, image: 'https://picsum.photos/seed/journal1/400/300' },
+    { id: 2, title: 'Anxiety & Calm Workbook', type: 'Book', price: 199, originalPrice: 349, image: 'https://picsum.photos/seed/book2/400/300' },
+    { id: 3, title: 'Gratitude & Reflection Journal', type: 'Journal', price: 129, originalPrice: 199, image: 'https://picsum.photos/seed/journal3/400/300' },
+    { id: 4, title: 'Psychology of Emotions', type: 'Book', price: 179, originalPrice: 299, image: 'https://picsum.photos/seed/book4/400/300' },
+    { id: 5, title: 'Daily Mindfulness Planner', type: 'Journal', price: 99, originalPrice: 179, image: 'https://picsum.photos/seed/planner5/400/300' },
+    { id: 6, title: 'Self-Care Guidebook', type: 'Book', price: 159, originalPrice: 279, image: 'https://picsum.photos/seed/book6/400/300' },
   ],
 
   // Reviews - replace with real testimonials

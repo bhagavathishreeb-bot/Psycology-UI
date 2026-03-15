@@ -29,7 +29,7 @@ export default function BookingPage() {
         <div className="booking-success-card">
           <span className="booking-success-icon">✓</span>
           <h2>Thank you for your booking!</h2>
-          <p>Our team will get in touch with you shortly.</p>
+          <p>Our team will get in touch with you soon.</p>
           <button type="button" className="btn-back-home" onClick={() => navigate('/')}>
             Back to Home
           </button>

@@ -25,25 +25,27 @@
 }
 
 .header-logo-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #fff;
+  border: 3px solid var(--mano-pink-light);
   box-shadow:
     0 4px 12px rgba(232, 160, 184, 0.2),
-    0 0 0 2px rgba(184, 224, 210, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  padding: 4px;
+    0 0 0 1px rgba(184, 224, 210, 0.5);
+  padding: 0;
 }
 
 .header-logo-icon img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.15);
 }
 
 .header-brand-name {
@@ -94,9 +96,9 @@
   }
 
   .header-logo-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
   }
 
   .header-brand-name {

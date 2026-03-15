@@ -1,4 +1,4 @@
-.booking-page-layout {
+.careers-apply-layout {
   min-height: calc(100vh - 60px);
   padding: 24px 48px 40px;
   display: flex;
@@ -14,12 +14,12 @@
   overflow-y: auto;
 }
 
-.booking-page-header {
+.careers-apply-header {
   width: 100%;
   margin-bottom: 12px;
 }
 
-.back-link {
+.careers-back-link {
   background: none;
   border: none;
   color: var(--mano-primary);
@@ -30,13 +30,11 @@
   transition: color 0.2s;
 }
 
-.back-link:hover {
+.careers-back-link:hover {
   color: var(--mano-primary-dark);
 }
 
-
-/* Success state */
-.booking-success-card {
+.careers-success-card {
   background: var(--mano-card-bg);
   border-radius: 20px;
   padding: 48px 40px;
@@ -48,7 +46,7 @@
   border-left: 4px solid var(--mano-primary);
 }
 
-.booking-success-icon {
+.careers-success-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -62,21 +60,21 @@
   margin-bottom: 24px;
 }
 
-.booking-success-card h2 {
+.careers-success-card h2 {
   font-size: 22px;
   font-weight: 700;
   color: var(--mano-text);
   margin: 0 0 12px;
 }
 
-.booking-success-card p {
+.careers-success-card p {
   font-size: 16px;
   color: var(--mano-text-muted);
   margin: 0 0 28px;
   line-height: 1.6;
 }
 
-.btn-back-home {
+.careers-btn-back {
   padding: 12px 28px;
   border: none;
   background: linear-gradient(135deg, var(--mano-primary), var(--mano-green));
@@ -88,6 +86,6 @@
   transition: all 0.2s;
 }
 
-.btn-back-home:hover {
+.careers-btn-back:hover {
   background: linear-gradient(135deg, var(--mano-primary-dark), var(--mano-primary));
 }
