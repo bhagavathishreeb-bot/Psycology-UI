@@ -53,7 +53,9 @@ export default function BookingPage() {
           </div>
           <div className="session-header-row">
             <h1 className="session-title">{session.title} ({session.duration})</h1>
-            <img src="/Me.jpeg" alt={CONFIG.name} className="session-profile-img" />
+            <div className="session-profile-img-wrap">
+              <img src="/final_me.jpeg" alt={CONFIG.name} className="session-profile-img" />
+            </div>
           </div>
           <div className="session-price-row">
             <span className="price-current">₹{session.price}</span>

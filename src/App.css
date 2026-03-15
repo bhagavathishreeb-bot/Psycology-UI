@@ -67,15 +67,24 @@
 .profile-image-wrapper {
   position: relative;
   margin-bottom: 16px;
+  width: 140px;
+  height: 140px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 4px solid var(--mano-pink-light);
+  box-shadow:
+    0 0 0 1px rgba(232, 160, 184, 0.3),
+    0 4px 16px rgba(123, 168, 123, 0.25),
+    0 8px 32px rgba(123, 168, 123, 0.15);
 }
 
 .profile-image {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border: 4px solid var(--mano-pink-light);
-  box-shadow: var(--mano-shadow);
+  object-position: center;
+  transform: scale(1.55);
+  display: block;
 }
 
 .verified-badge {

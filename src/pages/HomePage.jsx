@@ -15,8 +15,7 @@ export default function HomePage() {
         <div className="sidebar-content">
           <div className="profile-header">
             <div className="profile-image-wrapper">
-              <img src="/Me.jpeg" alt="Bhagavathi Shree" className="profile-image" />
-              <span className="verified-badge" aria-hidden="true">✓</span>
+              <img src="/final_me.jpeg" alt="Bhagavathi Shree" className="profile-image" />
             </div>
             <h1 className="profile-name">{CONFIG.name}</h1>
             <p className="profile-qualification">{CONFIG.qualification}</p>
