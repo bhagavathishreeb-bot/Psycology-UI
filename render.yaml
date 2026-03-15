@@ -1,0 +1,14 @@
+# Render deployment - choose ONE option below:
+
+# Option A: Static Site (recommended - simpler, free tier)
+# In Render Dashboard: New > Static Site
+# Build Command: npm run build
+# Publish Directory: dist
+# Add Redirect: Source /*, Destination /index.html, Type Rewrite (for React Router)
+
+# Option B: Web Service (uses start command)
+services:
+  - type: web
+    name: psycology-ui
+    buildCommand: npm install && npm run build
+    startCommand: npx serve -s dist
