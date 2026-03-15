@@ -1,13 +1,13 @@
-// Manotaranga Configuration - Update these values for your brand
+// ManoTaranga Configuration - Update these values for your brand
 
 export const CONFIG = {
   // Your profile
   name: 'Bhagavathi Shree',
   qualification: 'Psychologist | Masters in Psychology from Kateel Ashok Memorial College Shivmoggha',
-  aboutText: 'Bhagavathi Shree is celebrated for her compassionate and insightful therapy sessions through Manotaranga, helping clients explore emotions deeply and fostering personal growth. With a Masters in Psychology from Kateel Ashok Memorial College Shivmoggha, she brings expertise and empathy to every counseling session.',
+  aboutText: "Hi, I'm Bhagavathi. I hold a postgraduate degree in Psychology, but over time I've come to realize that studying psychology does not make one a 'master' of the human mind.",
   aboutParagraphs: [
-    'Bhagavathi Shree brings a unique, insightful, and comprehensive understanding of the psyche, going beyond traditional methods. Through Manotaranga, she helps clients explore emotions deeply and fosters lasting personal growth.',
-    'With a Masters in Psychology from Kateel Ashok Memorial College Shivmoggha, she combines academic rigor with compassionate, client-centered care. Every counseling session is tailored to support your mental wellness journey.',
+    "Hi, I'm Bhagavathi. I hold a postgraduate degree in Psychology, but I've come to understand that studying psychology does not make one a 'master' of the human mind—it reveals how vast, layered, and mysterious human behavior truly is. I draw from evidence-based frameworks like CBT, DBT, and ACT, while also valuing perspectives that explore the deeper architecture of human experience: existential reflections, psychoanalytic insights, and depth psychology. The human mind cannot be fully contained within any single explanatory system.",
+    "To me, counseling is less about applying predetermined formulas and more about cultivating a way of seeing. It is the discipline of listening deeply, asking precise questions, and approaching each individual as a singular psychological universe rather than a case to be categorized. For me, practicing psychology is about remaining intellectually open—where the most meaningful insights often begin with a question rather than an answer.",
   ],
 
   // Social media links
@@ -73,7 +73,7 @@ export const CONFIG = {
   reviews: [
     { name: 'Priya M.', rating: 5, text: 'Bhagavathi Shree is incredibly empathetic and insightful. Her sessions helped me understand my anxiety better. Highly recommend!', date: '2 weeks ago' },
     { name: 'Rahul K.', rating: 4.8, text: 'Professional and warm. The counseling sessions have made a real difference in my mental wellness journey.', date: '3 weeks ago' },
-    { name: 'Anitha S.', rating: 5, text: 'Manotaranga has been a blessing. Bhagavathi Shree creates a safe space to explore emotions without judgment.', date: '1 month ago' },
+    { name: 'Anitha S.', rating: 5, text: 'ManoTaranga has been a blessing. Bhagavathi Shree creates a safe space to explore emotions without judgment.', date: '1 month ago' },
     { name: 'Vikram R.', rating: 4.7, text: 'Clear, practical advice combined with genuine care. My stress levels have improved significantly.', date: '1 month ago' },
     { name: 'Deepa N.', rating: 4.9, text: 'The best psychologist I have consulted. She truly listens and helps you find your own path to healing.', date: '5 weeks ago' },
     { name: 'Suresh P.', rating: 4.6, text: 'Compassionate and knowledgeable. Sessions are always valuable and leave me feeling hopeful.', date: '6 weeks ago' },
@@ -81,7 +81,7 @@ export const CONFIG = {
     { name: 'Arun T.', rating: 4.5, text: 'Professional, patient, and understanding. Would recommend to anyone seeking mental wellness support.', date: '2 months ago' },
     { name: 'Meera V.', rating: 4.9, text: 'Her insights into psychology are profound. Every session feels like a step toward better self-understanding.', date: '3 months ago' },
     { name: 'Rohan D.', rating: 4.8, text: 'Excellent counselor. She helped me work through difficult emotions with grace and expertise.', date: '3 months ago' },
-    { name: 'Lakshmi G.', rating: 5, text: 'Manotaranga lives up to its name. A harmonious approach to mental wellness. Thank you!', date: '4 months ago' },
+    { name: 'Lakshmi G.', rating: 5, text: 'ManoTaranga lives up to its name. A harmonious approach to mental wellness. Thank you!', date: '4 months ago' },
     { name: 'Karthik B.', rating: 4.7, text: 'Highly professional yet warm. The sessions have been transformative for my mental health.', date: '4 months ago' },
   ],
 }

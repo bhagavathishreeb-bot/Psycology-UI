@@ -1,14 +1,12 @@
-import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { CONFIG } from '../config'
-import BookingForm from '../BookingForm'
+import ReviewsCarousel from '../components/ReviewsCarousel'
 
 export default function HomePage() {
-  const [selectedSession, setSelectedSession] = useState(null)
+  const navigate = useNavigate()
 
-  const handleBookSession = (session) => setSelectedSession(session)
-  const handleBookingSubmit = (data) => {
-    console.log('Booking submitted:', data)
-    setSelectedSession(null)
+  const handleBookSession = (session) => {
+    navigate('/book', { state: { session } })
   }
 
   return (
@@ -39,20 +37,9 @@ export default function HomePage() {
             </div>
           </section>
 
-          <div className="badges-row">
-            <div className="badge-card badge-bookings">
-              <span className="badge-number">{CONFIG.bookingsCount?.toLocaleString?.() ?? '3134'}</span>
-              <span className="badge-label">Bookings</span>
-            </div>
-            <div className="badge-card badge-trusted">Trusted Pro<br />2024</div>
-            <div className="badge-card badge-elite">Elite Advisor<br />2024</div>
-            <div className="badge-card badge-popular">Popular</div>
-            <div className="badge-card badge-more">+2</div>
-          </div>
-
-          <div className="brand-footer">
-            <img src="/ManoTaranga.jpeg" alt="Manotaranga" className="brand-logo" />
-            <span className="brand-name">Manotaranga</span>
+          <div className="bookings-display">
+            <span className="bookings-number">{CONFIG.bookingsCount?.toLocaleString?.() ?? '3134'}</span>
+            <span className="bookings-label">Total Bookings</span>
           </div>
         </div>
       </aside>
@@ -102,19 +89,7 @@ export default function HomePage() {
 
         <section className="ratings-section">
           <h2 className="section-title">Ratings and feedback</h2>
-          <div className="reviews-list">
-            {CONFIG.reviews?.map((review, i) => (
-              <article key={i} className="review-card">
-                <div className="review-header">
-                  <span className="review-stars">{'★'.repeat(Math.floor(review.rating))}{review.rating % 1 >= 0.5 ? '½' : ''}</span>
-                  <span className="review-rating-num">{review.rating}/5</span>
-                  <span className="review-date">{review.date}</span>
-                </div>
-                <p className="review-text">{review.text}</p>
-                <span className="review-author">— {review.name}</span>
-              </article>
-            ))}
-          </div>
+          <ReviewsCarousel reviews={CONFIG.reviews} visibleCount={3} intervalMs={4500} />
           <div className="ratings-cards">
             <div className="rating-card">
               <div className="rating-illustration"><span className="rating-icon">✉</span></div>
@@ -131,10 +106,6 @@ export default function HomePage() {
           </div>
         </section>
       </main>
-
-      {selectedSession && (
-        <BookingForm session={selectedSession} onClose={() => setSelectedSession(null)} onSubmit={handleBookingSubmit} />
-      )}
     </div>
   )
 }

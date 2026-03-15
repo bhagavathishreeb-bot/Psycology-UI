@@ -1,3 +1,7 @@
+.booking-page-form .booking-modal {
+  box-shadow: 0 4px 24px rgba(123, 168, 123, 0.12);
+}
+
 .booking-modal-overlay {
   position: fixed;
   inset: 0;

@@ -5,8 +5,10 @@ export default function Header() {
   return (
     <header className="app-header">
       <NavLink to="/" className="header-logo">
-        <img src="/ManoTaranga.jpeg" alt="Manotaranga" />
-        <span>Manotaranga</span>
+        <div className="header-logo-icon">
+          <img src="/ManoTaranga.jpeg" alt="ManoTaranga" />
+        </div>
+        <span className="header-brand-name">ManoTaranga</span>
       </NavLink>
       <nav className="header-nav">
         <NavLink to="/" end className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>

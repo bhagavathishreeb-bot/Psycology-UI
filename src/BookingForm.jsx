@@ -14,7 +14,7 @@ const CONCERN_OPTIONS = [
 
 const LANGUAGES = ['English', 'Hindi', 'Kannada', 'Tamil', 'Telugu', 'Malayalam', 'Other']
 
-export default function BookingForm({ session, onClose, onSubmit }) {
+export default function BookingForm({ session, onClose, onSubmit, fullPage }) {
   const [formData, setFormData] = useState({
     name: '',
     age: '',
@@ -55,17 +55,22 @@ export default function BookingForm({ session, onClose, onSubmit }) {
       sessionPrice: session?.price,
     }
     onSubmit?.(payload)
-    onClose?.()
+    if (!fullPage) onClose?.()
   }
 
+  const wrapperClass = fullPage ? 'booking-page-form' : 'booking-modal-overlay'
+  const modalClass = fullPage ? 'booking-modal booking-modal-fullpage' : 'booking-modal'
+
   return (
-    <div className="booking-modal-overlay" onClick={onClose}>
-      <div className="booking-modal" onClick={(e) => e.stopPropagation()}>
+    <div className={wrapperClass} onClick={!fullPage ? onClose : undefined}>
+      <div className={modalClass} onClick={(e) => fullPage ? null : e.stopPropagation()}>
         <div className="booking-modal-header">
           <h2>Book Session — {session?.title} (₹{session?.price})</h2>
-          <button type="button" className="close-btn" onClick={onClose} aria-label="Close">
-            ×
-          </button>
+          {!fullPage && (
+            <button type="button" className="close-btn" onClick={onClose} aria-label="Close">
+              ×
+            </button>
+          )}
         </div>
 
         <form className="booking-form" onSubmit={handleSubmit}>
@@ -296,8 +301,8 @@ export default function BookingForm({ session, onClose, onSubmit }) {
           </div>
 
           <div className="form-actions">
-            <button type="button" className="btn-cancel" onClick={onClose}>
-              Cancel
+            <button type="button" className="btn-cancel" onClick={fullPage ? () => onClose?.() : onClose}>
+              {fullPage ? 'Back to Home' : 'Cancel'}
             </button>
             <button type="submit" className="btn-submit">
               Submit Booking
