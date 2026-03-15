@@ -1,0 +1,240 @@
+.booking-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.booking-modal {
+  background: #fff;
+  border-radius: 16px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.booking-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e8ebe8;
+  background: linear-gradient(135deg, #FADADD 0%, #F5F9F5 100%);
+}
+
+.booking-modal-header h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2d2d2d;
+  margin: 0;
+}
+
+.close-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  color: #6b6b6b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.close-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.booking-form {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.form-section {
+  margin-bottom: 28px;
+}
+
+.form-section h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #7BA87B;
+  margin: 0 0 14px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #B8E0D2;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 520px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.booking-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #2d2d2d;
+}
+
+.booking-form label.other-concern,
+.booking-form label:not(.checkbox-label):not(.radio-label) {
+  margin-bottom: 0;
+}
+
+.required {
+  color: #c53030;
+}
+
+.booking-form input[type="text"],
+.booking-form input[type="tel"],
+.booking-form input[type="number"],
+.booking-form input[type="date"],
+.booking-form input[type="time"],
+.booking-form select,
+.booking-form textarea {
+  padding: 10px 12px;
+  border: 1px solid #e5e5e7;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.booking-form input:focus,
+.booking-form select:focus,
+.booking-form textarea:focus {
+  outline: none;
+  border-color: #7BA87B;
+  box-shadow: 0 0 0 2px rgba(123, 168, 123, 0.2);
+}
+
+.booking-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.checkbox-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 24px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 520px) {
+  .checkbox-group {
+    grid-template-columns: 1fr;
+  }
+}
+
+.checkbox-label {
+  flex-direction: row !important;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.checkbox-label input {
+  width: 18px;
+  height: 18px;
+  accent-color: #7BA87B;
+}
+
+.other-concern {
+  margin-top: 8px;
+}
+
+.other-concern input {
+  margin-top: 6px;
+}
+
+.radio-group {
+  display: flex;
+  gap: 24px;
+  margin: 12px 0;
+}
+
+.radio-label {
+  flex-direction: row !important;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.radio-label input {
+  width: 18px;
+  height: 18px;
+  accent-color: #7BA87B;
+}
+
+.conditional-fields {
+  margin-top: 16px;
+  padding: 16px;
+  background: #F5F9F5;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  padding-top: 20px;
+  border-top: 1px solid #e5e5e7;
+  margin-top: 8px;
+}
+
+.btn-cancel {
+  padding: 12px 24px;
+  border: 1px solid #e5e5e7;
+  background: #fff;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #6b6b6b;
+  transition: all 0.2s;
+}
+
+.btn-cancel:hover {
+  background: #f5f5f7;
+}
+
+.btn-submit {
+  padding: 12px 24px;
+  border: none;
+  background: linear-gradient(135deg, #7BA87B, #98D8AA);
+  color: white;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-submit:hover {
+  background: linear-gradient(135deg, #5d9a5d, #7BA87B);
+}
