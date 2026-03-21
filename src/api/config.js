@@ -4,7 +4,7 @@
  * Falls back to localhost:8080 when not set
  */
 export const API_BASE =
-  import.meta.env.VITE_API_URL || 'http://localhost:8089'
+  import.meta.env.VITE_API_URL || 'https://psycology-backend.onrender.com'
 
 export const getApiUrl = (path) => {
   const base = API_BASE.replace(/\/$/, '')

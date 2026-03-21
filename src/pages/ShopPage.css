@@ -34,12 +34,14 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 28px;
+  overflow: visible;
 }
 
 .shop-card {
+  position: relative;
   background: #fff;
   border-radius: 16px;
-  overflow: hidden;
+  overflow: visible;
   box-shadow: 0 4px 20px rgba(123, 168, 123, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
   border: 1px solid rgba(229, 229, 231, 0.8);
   transition: box-shadow 0.3s ease, transform 0.2s ease;
@@ -53,6 +55,7 @@
 .shop-card-image {
   height: 180px;
   overflow: hidden;
+  border-radius: 16px 16px 0 0;
   background: linear-gradient(145deg, #B8E0D2 0%, #FADADD 100%);
 }
 
@@ -129,6 +132,15 @@
   transition: opacity 0.3s;
 }
 
+.shop-btn-disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.shop-btn-disabled:hover {
+  transform: none;
+}
+
 .shop-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(123, 168, 123, 0.45);
@@ -136,4 +148,21 @@
 
 .shop-btn:hover::before {
   opacity: 1;
+}
+
+/* Coming Soon ribbon - sits on top of card */
+.coming-soon-ribbon {
+  position: absolute;
+  top: 16px;
+  right: -36px;
+  transform: rotate(45deg);
+  background: linear-gradient(135deg, #E8A0B8 0%, #7BA87B 100%);
+  color: white;
+  padding: 8px 44px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  box-shadow: 0 3px 12px rgba(123, 168, 123, 0.4);
+  z-index: 20;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }

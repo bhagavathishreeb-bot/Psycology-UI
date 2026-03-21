@@ -2,12 +2,12 @@ import { useState, useRef, useEffect } from 'react'
 import { api } from '../api/client'
 import './ChatBot.css'
 
-const BOT_NAME = 'KnowBot'
+const BOT_NAME = 'Taara'
 
 export default function ChatBot() {
   const [open, setOpen] = useState(false)
   const [messages, setMessages] = useState([
-    { role: 'assistant', content: "Hi! I'm KnowBot, your psychology companion. Ask me anything about mental wellness, emotions, stress, anxiety, or psychology. How can I help you today?" },
+    { role: 'assistant', content: "Hi! I'm Taara, your psychology companion. Ask me anything about mental wellness, emotions, stress, anxiety, or psychology. How can I help you today?" },
   ])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)

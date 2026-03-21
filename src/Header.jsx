@@ -14,12 +14,14 @@ export default function Header() {
         <NavLink to="/" end className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
           Home
         </NavLink>
-        <NavLink to="/courses" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+        <span className="nav-link nav-link-coming-soon" aria-disabled="true">
+          <span className="coming-soon-badge">Coming Soon</span>
           Courses
-        </NavLink>
-        <NavLink to="/shop" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+        </span>
+        <span className="nav-link nav-link-coming-soon" aria-disabled="true">
+          <span className="coming-soon-badge">Coming Soon</span>
           Shop
-        </NavLink>
+        </span>
         <NavLink to="/careers" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
           Careers
         </NavLink>

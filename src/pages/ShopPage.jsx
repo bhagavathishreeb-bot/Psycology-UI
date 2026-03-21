@@ -1,11 +1,7 @@
-import { useState } from 'react'
 import { CONFIG } from '../config'
-import ShopCheckoutModal from '../components/ShopCheckoutModal'
 import './ShopPage.css'
 
 export default function ShopPage() {
-  const [checkoutItem, setCheckoutItem] = useState(null)
-
   return (
     <div className="shop-page">
       <div className="shop-container">
@@ -15,6 +11,7 @@ export default function ShopPage() {
         <div className="shop-grid">
           {CONFIG.shopItems?.map((item) => (
             <article key={item.id} className="shop-card">
+              <span className="coming-soon-ribbon">Coming Soon</span>
               <div className="shop-card-image">
                 <img src={item.image} alt={item.title} className="shop-card-img" />
               </div>
@@ -27,19 +24,12 @@ export default function ShopPage() {
                     <span className="shop-original">₹{item.originalPrice}</span>
                   )}
                 </div>
-                <button className="shop-btn" onClick={() => setCheckoutItem(item)}>Buy Now</button>
+                <button className="shop-btn shop-btn-disabled" disabled>Buy Now</button>
               </div>
             </article>
           ))}
         </div>
       </div>
-      {checkoutItem && (
-        <ShopCheckoutModal
-          item={checkoutItem}
-          onClose={() => setCheckoutItem(null)}
-          onSuccess={() => setCheckoutItem(null)}
-        />
-      )}
     </div>
   )
 }
