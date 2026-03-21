@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './JobApplicationForm.css'
 
-export default function JobApplicationForm({ job, onClose, onSubmit, fullPage }) {
+export default function JobApplicationForm({ job, onClose, onSubmit, fullPage, loading = false }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -131,8 +131,8 @@ export default function JobApplicationForm({ job, onClose, onSubmit, fullPage })
             <button type="button" className="job-btn-cancel" onClick={onClose}>
               Back to Careers
             </button>
-            <button type="submit" className="job-btn-submit">
-              Submit Application
+            <button type="submit" className="job-btn-submit" disabled={loading}>
+              {loading ? 'Submitting...' : 'Submit Application'}
             </button>
           </div>
         </form>
@@ -241,8 +241,8 @@ export default function JobApplicationForm({ job, onClose, onSubmit, fullPage })
             <button type="button" className="job-btn-cancel" onClick={onClose}>
               Cancel
             </button>
-            <button type="submit" className="job-btn-submit">
-              Submit Application
+            <button type="submit" className="job-btn-submit" disabled={loading}>
+              {loading ? 'Submitting...' : 'Submit Application'}
             </button>
           </div>
         </form>

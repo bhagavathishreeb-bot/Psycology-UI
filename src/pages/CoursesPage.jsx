@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import { CONFIG } from '../config'
 import { getCourseIcon } from '../components/CourseCardIcons'
+import CourseCheckoutModal from '../components/CourseCheckoutModal'
 import './CoursesPage.css'
 
 const CARD_BG_COLORS = [
@@ -11,6 +13,8 @@ const CARD_BG_COLORS = [
 ]
 
 export default function CoursesPage() {
+  const [checkoutCourse, setCheckoutCourse] = useState(null)
+
   return (
     <div className="courses-page">
       <div className="courses-container">
@@ -40,12 +44,19 @@ export default function CoursesPage() {
                     <span className="course-original">₹{course.originalPrice}</span>
                   )}
                 </div>
-                <button className="course-btn">Enroll Now</button>
+                <button className="course-btn" onClick={() => setCheckoutCourse(course)}>Enroll Now</button>
               </div>
             </article>
           ))}
         </div>
       </div>
+      {checkoutCourse && (
+        <CourseCheckoutModal
+          course={checkoutCourse}
+          onClose={() => setCheckoutCourse(null)}
+          onSuccess={() => setCheckoutCourse(null)}
+        />
+      )}
     </div>
   )
 }

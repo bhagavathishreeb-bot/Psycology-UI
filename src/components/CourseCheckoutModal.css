@@ -1,0 +1,127 @@
+.course-checkout-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.course-checkout-modal {
+  background: #fff;
+  border-radius: 16px;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.course-checkout-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 1px solid #e8ebe8;
+}
+
+.course-checkout-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--mano-primary-dark);
+}
+
+.course-checkout-close {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #6b6b6b;
+}
+
+.course-checkout-form {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.course-checkout-summary {
+  margin-bottom: 8px;
+}
+
+.course-checkout-price {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--mano-primary-dark);
+}
+
+.course-checkout-original {
+  font-size: 14px;
+  color: var(--mano-text-muted);
+  text-decoration: line-through;
+  margin-left: 8px;
+}
+
+.course-checkout-error {
+  background: #fef2f2;
+  color: #b91c1c;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.course-checkout-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--mano-text);
+}
+
+.course-checkout-form input {
+  padding: 12px 14px;
+  border: 1px solid rgba(123, 168, 123, 0.3);
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.course-checkout-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.course-checkout-cancel {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid rgba(123, 168, 123, 0.3);
+  background: #fff;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--mano-text-muted);
+}
+
+.course-checkout-submit {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  background: linear-gradient(135deg, var(--mano-primary) 0%, var(--mano-green) 100%);
+  color: white;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.course-checkout-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}

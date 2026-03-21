@@ -14,9 +14,10 @@ const CONCERN_OPTIONS = [
 
 const LANGUAGES = ['English', 'Hindi', 'Kannada', 'Tamil', 'Telugu', 'Malayalam', 'Other']
 
-export default function BookingForm({ session, onClose, onSubmit, fullPage }) {
+export default function BookingForm({ session, onClose, onSubmit, fullPage, loading = false }) {
   const [formData, setFormData] = useState({
     name: '',
+    email: '',
     age: '',
     occupation: '',
     phone: '',
@@ -83,6 +84,16 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage }) {
                   value={formData.name}
                   onChange={(e) => update('name', e.target.value)}
                   placeholder="Your name"
+                />
+              </label>
+              <label>
+                Email <span className="required">*</span>
+                <input
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={(e) => update('email', e.target.value)}
+                  placeholder="you@example.com"
                 />
               </label>
               <label>
@@ -348,8 +359,8 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage }) {
                   <span className="payment-original">₹{session.originalPrice.toLocaleString('en-IN')}</span>
                 )}
               </span>
-              <button type="submit" className="btn-confirm-pay">
-                Confirm and Pay
+              <button type="submit" className="btn-confirm-pay" disabled={loading}>
+                {loading ? 'Submitting...' : 'Confirm and Pay'}
               </button>
             </div>
           </div>
@@ -379,6 +390,16 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage }) {
                   value={formData.name}
                   onChange={(e) => update('name', e.target.value)}
                   placeholder="Your name"
+                />
+              </label>
+              <label>
+                Email <span className="required">*</span>
+                <input
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={(e) => update('email', e.target.value)}
+                  placeholder="you@example.com"
                 />
               </label>
               <label>
@@ -574,8 +595,8 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage }) {
             <button type="button" className="btn-cancel" onClick={onClose}>
               Cancel
             </button>
-            <button type="submit" className="btn-submit">
-              Submit Booking
+            <button type="submit" className="btn-submit" disabled={loading}>
+              {loading ? 'Submitting...' : 'Submit Booking'}
             </button>
           </div>
         </form>

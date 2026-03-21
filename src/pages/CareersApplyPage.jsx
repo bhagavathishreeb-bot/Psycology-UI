@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { CONFIG } from '../config'
 import JobApplicationForm from '../components/JobApplicationForm'
+import { postCareerApplication } from '../api/client'
 import './CareersApplyPage.css'
 
 export default function CareersApplyPage() {
@@ -9,10 +10,35 @@ export default function CareersApplyPage() {
   const navigate = useNavigate()
   const job = location.state?.job ?? null
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
 
-  const handleSubmit = (data) => {
-    console.log('Application submitted:', data)
-    setSubmitted(true)
+  const handleSubmit = async (data) => {
+    if (!data.resume) {
+      setError('Please upload your resume.')
+      return
+    }
+    setError(null)
+    setLoading(true)
+    try {
+      const formData = new FormData()
+      formData.append('name', data.name)
+      formData.append('email', data.email)
+      formData.append('phone', data.phone)
+      formData.append('linkedin', data.linkedin || '')
+      formData.append('experience', data.experience)
+      formData.append('message', data.message || '')
+      formData.append('resume', data.resume)
+      formData.append('jobTitle', data.jobTitle)
+      formData.append('jobType', data.jobType)
+      formData.append('jobLocation', data.jobLocation)
+      await postCareerApplication(formData)
+      setSubmitted(true)
+    } catch (err) {
+      setError(err.message || 'Failed to submit application. Please try again.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   if (!job) {
@@ -45,11 +71,17 @@ export default function CareersApplyPage() {
           ← Back
         </button>
       </div>
+      {error && (
+        <div className="careers-error" role="alert">
+          {error}
+        </div>
+      )}
       <JobApplicationForm
         job={job}
         fullPage
         onSubmit={handleSubmit}
         onClose={() => navigate('/careers')}
+        loading={loading}
       />
     </div>
   )

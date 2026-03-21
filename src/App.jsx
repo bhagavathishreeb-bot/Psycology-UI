@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import './App.css'
 import Header from './Header'
+import ChatBot from './components/ChatBot'
 import HomePage from './pages/HomePage'
 import BookingPage from './pages/BookingPage'
 import CoursesPage from './pages/CoursesPage'
@@ -20,6 +21,7 @@ function App() {
         <Route path="/careers" element={<CareersPage />} />
         <Route path="/careers/apply" element={<CareersApplyPage />} />
       </Routes>
+      <ChatBot />
     </div>
   )
 }

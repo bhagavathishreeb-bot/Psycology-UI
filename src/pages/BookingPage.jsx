@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { CONFIG } from '../config'
 import BookingForm from '../BookingForm'
+import { api } from '../api/client'
+import { openRazorpayCheckout } from '../api/razorpay'
 import './BookingPage.css'
 
 export default function BookingPage() {
@@ -9,12 +11,57 @@ export default function BookingPage() {
   const navigate = useNavigate()
   const session = location.state?.session ?? CONFIG.sessions?.[0] ?? null
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
   const [testimonialIndex, setTestimonialIndex] = useState(0)
   const testimonials = CONFIG.reviews?.slice(0, 4) ?? []
 
-  const handleSubmit = (data) => {
-    console.log('Booking submitted:', data)
-    setSubmitted(true)
+  const handleSubmit = async (data) => {
+    setError(null)
+    setLoading(true)
+    try {
+      const bookingRes = await api.postBookings({
+        name: data.name,
+        email: data.email,
+        age: Number(data.age),
+        occupation: data.occupation,
+        phone: data.phone,
+        dob: data.dob,
+        gender: data.gender,
+        city: data.city,
+        preferredLanguage: data.preferredLanguage,
+        whatBringsToTherapy: data.whatBringsToTherapy,
+        howLongConcerns: data.howLongConcerns,
+        concerns: data.concerns || {},
+        otherConcern: data.otherConcern || null,
+        seenPsychologistBefore: data.seenPsychologistBefore || null,
+        previousDiagnosis: data.previousDiagnosis || null,
+        diagnosisDuration: data.diagnosisDuration || null,
+        session: data.session,
+        sessionDuration: data.sessionDuration,
+        sessionPrice: data.sessionPrice,
+      })
+
+      const entityId = bookingRes.id ?? bookingRes.bookingId
+      const paymentResult = await openRazorpayCheckout({
+        amount: data.sessionPrice,
+        receipt: `booking_${entityId}`,
+        orderType: 'booking',
+        entityId,
+        customerName: data.name,
+        customerEmail: data.email,
+      })
+
+      if (paymentResult.success) {
+        setSubmitted(true)
+      } else {
+        setError(paymentResult.message || 'Payment failed. Your booking is saved; we will contact you.')
+      }
+    } catch (err) {
+      setError(err.message || 'Failed to submit booking. Please try again.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   if (!session) {
@@ -108,11 +155,17 @@ export default function BookingPage() {
 
         {/* Right panel - Form */}
         <main className="booking-form-panel">
+          {error && (
+            <div className="booking-error" role="alert">
+              {error}
+            </div>
+          )}
           <BookingForm
             session={session}
             fullPage
             onSubmit={handleSubmit}
             onClose={() => navigate('/')}
+            loading={loading}
           />
         </main>
       </div>
