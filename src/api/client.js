@@ -27,6 +27,8 @@ async function request(path, options = {}) {
 }
 
 export const api = {
+  getBookingAvailableSlots: (date) =>
+    request(`/api/bookings/available-slots?date=${encodeURIComponent(date)}`),
   postBookings: (body) => request('/api/bookings', { method: 'POST', body: JSON.stringify(body) }),
   postCoursePurchases: (body) => request('/api/course-purchases', { method: 'POST', body: JSON.stringify(body) }),
   postShopOrders: (body) => request('/api/shop-orders', { method: 'POST', body: JSON.stringify(body) }),

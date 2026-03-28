@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { api } from './api/client'
 import './BookingForm.css'
 
 const CONCERN_OPTIONS = [
@@ -14,7 +15,105 @@ const CONCERN_OPTIONS = [
 
 const LANGUAGES = ['English', 'Hindi', 'Kannada', 'Tamil', 'Telugu', 'Malayalam', 'Other']
 
-export default function BookingForm({ session, onClose, onSubmit, fullPage, loading = false }) {
+function getTodayISODateString() {
+  const d = new Date()
+  const y = d.getFullYear()
+  const m = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
+  return `${y}-${m}-${day}`
+}
+
+function PreferredScheduleSection({
+  bookingDate,
+  slotStart,
+  slotEnd,
+  minDate,
+  slotsLoading,
+  slotsFetchError,
+  slotMeta,
+  slots,
+  onDateChange,
+  onSelectSlot,
+  validationError,
+}) {
+  return (
+    <div className="form-section">
+      <h3>Preferred session date & time</h3>
+      <label>
+        <span className="booking-label-inline">Preferred date <span className="required">*</span></span>
+        <input type="date" required min={minDate} value={bookingDate} onChange={onDateChange} />
+      </label>
+      {validationError && (
+        <p className="booking-schedule-validation" role="alert">
+          {validationError}
+        </p>
+      )}
+      {bookingDate && slotsFetchError && (
+        <p className="booking-slots-error" role="alert">
+          {slotsFetchError}
+        </p>
+      )}
+      {bookingDate && slotsLoading && (
+        <p className="booking-slots-loading" aria-live="polite">
+          Loading available times…
+        </p>
+      )}
+      {bookingDate && !slotsLoading && slotMeta && slotMeta.available === false && (
+        <p className="booking-slots-unavailable" role="status">
+          {slotMeta.unavailableReason ||
+            'This date is not available. Please choose another day.'}
+        </p>
+      )}
+      {bookingDate &&
+        !slotsLoading &&
+        slotMeta &&
+        slotMeta.available === true &&
+        slots.length === 0 && (
+          <p className="booking-slots-empty" role="status">
+            No open slots for this date. Try another day.
+          </p>
+        )}
+      {bookingDate && !slotsLoading && slotMeta && slotMeta.available === true && slots.length > 0 && (
+        <div className="booking-slots-wrap">
+          <p className="booking-slots-field-label">
+            <span className="booking-label-inline">Available times <span className="required">*</span></span>
+          </p>
+          <div className="booking-slots-grid" role="group" aria-label="Available session times">
+            {slots.map((slot) => {
+              const selected = slotStart === slot.start && slotEnd === slot.end
+              return (
+                <button
+                  key={`${slot.start}-${slot.end}`}
+                  type="button"
+                  className={`booking-slot-btn${selected ? ' booking-slot-btn-selected' : ''}`}
+                  onClick={() => onSelectSlot(slot.start, slot.end)}
+                >
+                  {slot.start} – {slot.end}
+                </button>
+              )
+            })}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+function submitButtonLabel(loading, loadingPhase, fullPage) {
+  if (!loading) return fullPage ? 'Confirm and Pay' : 'Submit Booking'
+  if (loadingPhase === 'saving') return 'Saving your booking…'
+  if (loadingPhase === 'paying') return 'Opening secure payment…'
+  return 'Please wait…'
+}
+
+export default function BookingForm({
+  session,
+  onClose,
+  onSubmit,
+  fullPage,
+  loading = false,
+  loadingPhase = null,
+}) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -38,6 +137,72 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
   const [receiveOnPhone, setReceiveOnPhone] = useState(true)
   const [showDiscountInput, setShowDiscountInput] = useState(false)
   const [discountCode, setDiscountCode] = useState('')
+  const [slots, setSlots] = useState([])
+  const [slotMeta, setSlotMeta] = useState(null)
+  const [slotsLoading, setSlotsLoading] = useState(false)
+  const [slotsFetchError, setSlotsFetchError] = useState(null)
+  const [scheduleValidationError, setScheduleValidationError] = useState(null)
+
+  useEffect(() => {
+    if (!formData.bookingDate) {
+      setSlots([])
+      setSlotMeta(null)
+      setSlotsFetchError(null)
+      setSlotsLoading(false)
+      return
+    }
+
+    let cancelled = false
+    setSlotsLoading(true)
+    setSlotsFetchError(null)
+
+    api
+      .getBookingAvailableSlots(formData.bookingDate)
+      .then((res) => {
+        if (cancelled) return
+        setSlotMeta({
+          date: res.date,
+          available: res.available !== false,
+          unavailableReason: res.unavailableReason ?? null,
+        })
+        setSlots(Array.isArray(res.slots) ? res.slots : [])
+      })
+      .catch((err) => {
+        if (cancelled) return
+        setSlotsFetchError(err.message || 'Could not load available times.')
+        setSlots([])
+        setSlotMeta(null)
+      })
+      .finally(() => {
+        if (!cancelled) setSlotsLoading(false)
+      })
+
+    return () => {
+      cancelled = true
+    }
+  }, [formData.bookingDate])
+
+  const handlePreferredDateChange = (e) => {
+    const v = e.target.value
+    setFormData((prev) => ({
+      ...prev,
+      bookingDate: v,
+      slotStart: '',
+      slotEnd: '',
+      bookingTime: '',
+    }))
+    setScheduleValidationError(null)
+  }
+
+  const handleSelectSlot = (start, end) => {
+    setFormData((prev) => ({
+      ...prev,
+      slotStart: start,
+      slotEnd: end,
+      bookingTime: `${start}-${end}`,
+    }))
+    setScheduleValidationError(null)
+  }
 
   const sessionPrice = session?.price ?? 0
   const platformFee = 10
@@ -56,6 +221,17 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    if (
+      !formData.bookingDate?.trim() ||
+      !formData.slotStart?.trim() ||
+      !formData.slotEnd?.trim()
+    ) {
+      setScheduleValidationError(
+        'Please select a preferred date and a time slot for your counseling session.',
+      )
+      return
+    }
+    setScheduleValidationError(null)
     const payload = {
       ...formData,
       session: session?.title,
@@ -64,6 +240,20 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
     }
     onSubmit?.(payload)
     if (!fullPage) onClose?.()
+  }
+
+  const scheduleSectionProps = {
+    bookingDate: formData.bookingDate,
+    slotStart: formData.slotStart,
+    slotEnd: formData.slotEnd,
+    minDate: getTodayISODateString(),
+    slotsLoading,
+    slotsFetchError,
+    slotMeta,
+    slots,
+    onDateChange: handlePreferredDateChange,
+    onSelectSlot: handleSelectSlot,
+    validationError: scheduleValidationError,
   }
 
   if (fullPage) {
@@ -77,7 +267,7 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
             <h3>Personal Information</h3>
             <div className="form-grid">
               <label>
-                Full Name <span className="required">*</span>
+                <span className="booking-label-inline">Full Name <span className="required">*</span></span>
                 <input
                   type="text"
                   required
@@ -87,7 +277,7 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
                 />
               </label>
               <label>
-                Email <span className="required">*</span>
+                <span className="booking-label-inline">Email <span className="required">*</span></span>
                 <input
                   type="email"
                   required
@@ -97,7 +287,7 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
                 />
               </label>
               <label>
-                Age <span className="required">*</span>
+                <span className="booking-label-inline">Age <span className="required">*</span></span>
                 <input
                   type="number"
                   required
@@ -109,7 +299,7 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
                 />
               </label>
               <label>
-                Occupation <span className="required">*</span>
+                <span className="booking-label-inline">Occupation <span className="required">*</span></span>
                 <input
                   type="text"
                   required
@@ -119,7 +309,7 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
                 />
               </label>
               <label>
-                Phone Number <span className="required">*</span>
+                <span className="booking-label-inline">Phone Number <span className="required">*</span></span>
                 <input
                   type="tel"
                   required
@@ -129,7 +319,7 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
                 />
               </label>
               <label>
-                Date of Birth <span className="required">*</span>
+                <span className="booking-label-inline">Date of Birth <span className="required">*</span></span>
                 <input
                   type="date"
                   required
@@ -138,7 +328,7 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
                 />
               </label>
               <label>
-                Gender <span className="required">*</span>
+                <span className="booking-label-inline">Gender <span className="required">*</span></span>
                 <select
                   required
                   value={formData.gender}
@@ -156,9 +346,9 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
 
           <div className="form-section">
             <h3>Location & Language</h3>
-            <div className="form-grid">
+            <div className="form-grid form-grid-2-cols">
               <label>
-                City / Location <span className="required">*</span>
+                <span className="booking-label-inline">City / Location <span className="required">*</span></span>
                 <input
                   type="text"
                   required
@@ -168,7 +358,7 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
                 />
               </label>
               <label>
-                Preferred Language <span className="required">*</span>
+                <span className="booking-label-inline">Preferred Language <span className="required">*</span></span>
                 <select
                   required
                   value={formData.preferredLanguage}
@@ -183,10 +373,12 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
             </div>
           </div>
 
+          <PreferredScheduleSection {...scheduleSectionProps} />
+
           <div className="form-section">
             <h3>What brings you to therapy?</h3>
             <label>
-              Please describe what brings you to therapy <span className="required">*</span>
+              <span className="booking-label-inline">Please describe what brings you to therapy <span className="required">*</span></span>
               <textarea
                 required
                 rows={2}
@@ -196,7 +388,7 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
               />
             </label>
             <label>
-              How long have these concerns been present? <span className="required">*</span>
+              <span className="booking-label-inline">How long have these concerns been present? <span className="required">*</span></span>
               <input
                 type="text"
                 required
@@ -209,15 +401,15 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
 
           <div className="form-section">
             <h3>Concerns (select all that apply)</h3>
-            <div className="checkbox-group">
+            <div className="checkbox-group checkbox-group-concerns">
               {CONCERN_OPTIONS.map((concern) => (
-                <label key={concern} className="checkbox-label">
+                <label key={concern} className="checkbox-label checkbox-label-concern">
                   <input
                     type="checkbox"
                     checked={formData.concerns[concern] || false}
                     onChange={() => toggleConcern(concern)}
                   />
-                  <span>{concern}</span>
+                  <span className="checkbox-label-concern-text">{concern}</span>
                 </label>
               ))}
             </div>
@@ -232,10 +424,16 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
             </label>
           </div>
 
-          <div className="form-section">
+          <div className="form-section form-section-mental-health">
             <h3>Previous Mental Health History</h3>
-            <label>
-              Have you seen a psychologist or psychiatrist before? <span className="required">*</span>
+            <label className="booking-question-label">
+              <span className="booking-question-text">
+                Have you seen a psychologist or psychiatrist before?
+                <span className="required" aria-hidden="true">
+                  {' '}
+                  *
+                </span>
+              </span>
             </label>
             <div className="radio-group">
               <label className="radio-label">
@@ -339,6 +537,10 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
               </div>
             </div>
 
+            <p className="booking-pay-flow-hint">
+              We&apos;ll save your details first, then open a secure payment window to confirm your session.
+            </p>
+
             <div className="payment-security">
               <span className="security-icon">🔒</span>
               <span>Payments are 100% secure & encrypted</span>
@@ -360,7 +562,7 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
                 )}
               </span>
               <button type="submit" className="btn-confirm-pay" disabled={loading}>
-                {loading ? 'Submitting...' : 'Confirm and Pay'}
+                {submitButtonLabel(loading, loadingPhase, true)}
               </button>
             </div>
           </div>
@@ -383,7 +585,7 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
             <h3>Personal Information</h3>
             <div className="form-grid">
               <label>
-                Full Name <span className="required">*</span>
+                <span className="booking-label-inline">Full Name <span className="required">*</span></span>
                 <input
                   type="text"
                   required
@@ -393,7 +595,7 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
                 />
               </label>
               <label>
-                Email <span className="required">*</span>
+                <span className="booking-label-inline">Email <span className="required">*</span></span>
                 <input
                   type="email"
                   required
@@ -403,7 +605,7 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
                 />
               </label>
               <label>
-                Age <span className="required">*</span>
+                <span className="booking-label-inline">Age <span className="required">*</span></span>
                 <input
                   type="number"
                   required
@@ -415,7 +617,7 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
                 />
               </label>
               <label>
-                Occupation <span className="required">*</span>
+                <span className="booking-label-inline">Occupation <span className="required">*</span></span>
                 <input
                   type="text"
                   required
@@ -425,7 +627,7 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
                 />
               </label>
               <label>
-                Phone Number <span className="required">*</span>
+                <span className="booking-label-inline">Phone Number <span className="required">*</span></span>
                 <input
                   type="tel"
                   required
@@ -435,7 +637,7 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
                 />
               </label>
               <label>
-                Date of Birth <span className="required">*</span>
+                <span className="booking-label-inline">Date of Birth <span className="required">*</span></span>
                 <input
                   type="date"
                   required
@@ -444,7 +646,7 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
                 />
               </label>
               <label>
-                Gender <span className="required">*</span>
+                <span className="booking-label-inline">Gender <span className="required">*</span></span>
                 <select
                   required
                   value={formData.gender}
@@ -462,9 +664,9 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
 
           <div className="form-section">
             <h3>Location & Language</h3>
-            <div className="form-grid">
+            <div className="form-grid form-grid-2-cols">
               <label>
-                City / Location <span className="required">*</span>
+                <span className="booking-label-inline">City / Location <span className="required">*</span></span>
                 <input
                   type="text"
                   required
@@ -474,7 +676,7 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
                 />
               </label>
               <label>
-                Preferred Language <span className="required">*</span>
+                <span className="booking-label-inline">Preferred Language <span className="required">*</span></span>
                 <select
                   required
                   value={formData.preferredLanguage}
@@ -489,10 +691,12 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
             </div>
           </div>
 
+          <PreferredScheduleSection {...scheduleSectionProps} />
+
           <div className="form-section">
             <h3>What brings you to therapy?</h3>
             <label>
-              Please describe what brings you to therapy <span className="required">*</span>
+              <span className="booking-label-inline">Please describe what brings you to therapy <span className="required">*</span></span>
               <textarea
                 required
                 rows={2}
@@ -502,7 +706,7 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
               />
             </label>
             <label>
-              How long have these concerns been present? <span className="required">*</span>
+              <span className="booking-label-inline">How long have these concerns been present? <span className="required">*</span></span>
               <input
                 type="text"
                 required
@@ -515,15 +719,15 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
 
           <div className="form-section">
             <h3>Concerns (select all that apply)</h3>
-            <div className="checkbox-group">
+            <div className="checkbox-group checkbox-group-concerns">
               {CONCERN_OPTIONS.map((concern) => (
-                <label key={concern} className="checkbox-label">
+                <label key={concern} className="checkbox-label checkbox-label-concern">
                   <input
                     type="checkbox"
                     checked={formData.concerns[concern] || false}
                     onChange={() => toggleConcern(concern)}
                   />
-                  <span>{concern}</span>
+                  <span className="checkbox-label-concern-text">{concern}</span>
                 </label>
               ))}
             </div>
@@ -538,10 +742,16 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
             </label>
           </div>
 
-          <div className="form-section">
+          <div className="form-section form-section-mental-health">
             <h3>Previous Mental Health History</h3>
-            <label>
-              Have you seen a psychologist or psychiatrist before? <span className="required">*</span>
+            <label className="booking-question-label">
+              <span className="booking-question-text">
+                Have you seen a psychologist or psychiatrist before?
+                <span className="required" aria-hidden="true">
+                  {' '}
+                  *
+                </span>
+              </span>
             </label>
             <div className="radio-group">
               <label className="radio-label">
@@ -596,7 +806,7 @@ export default function BookingForm({ session, onClose, onSubmit, fullPage, load
               Cancel
             </button>
             <button type="submit" className="btn-submit" disabled={loading}>
-              {loading ? 'Submitting...' : 'Submit Booking'}
+              {submitButtonLabel(loading, loadingPhase, false)}
             </button>
           </div>
         </form>

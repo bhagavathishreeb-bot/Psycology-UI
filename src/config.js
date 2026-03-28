@@ -18,7 +18,7 @@ export const CONFIG = {
   },
 
   // Badges - update bookings count
-  bookingsCount: 3134,
+  bookingsCount: 100,
 
   // YouTube videos for Watch & Learn section
   youtubeVideos: [

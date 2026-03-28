@@ -10,15 +10,35 @@ export default function BookingPage() {
   const location = useLocation()
   const navigate = useNavigate()
   const session = location.state?.session ?? CONFIG.sessions?.[0] ?? null
-  const [submitted, setSubmitted] = useState(false)
+  const [paymentConfirmed, setPaymentConfirmed] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [loadingPhase, setLoadingPhase] = useState(null)
   const [error, setError] = useState(null)
+  const [pendingPayment, setPendingPayment] = useState(null)
   const [testimonialIndex, setTestimonialIndex] = useState(0)
   const testimonials = CONFIG.reviews?.slice(0, 4) ?? []
 
+  const runPayment = async (entityId, data) => {
+    return openRazorpayCheckout({
+      amount: data.sessionPrice,
+      receipt: `booking_${entityId}`,
+      orderType: 'booking',
+      entityId,
+      customerName: data.name,
+      customerEmail: data.email,
+    })
+  }
+
   const handleSubmit = async (data) => {
+    if (pendingPayment) {
+      setError(
+        'You already have a saved booking awaiting payment. Use "Try payment again", or "Start over with a new booking" below.',
+      )
+      return
+    }
     setError(null)
     setLoading(true)
+    setLoadingPhase('saving')
     try {
       const bookingRes = await api.postBookings({
         name: data.name,
@@ -30,6 +50,12 @@ export default function BookingPage() {
         gender: data.gender,
         city: data.city,
         preferredLanguage: data.preferredLanguage,
+        preferredDate: data.bookingDate,
+        slotStart: data.slotStart,
+        slotEnd: data.slotEnd,
+        bookingDate: data.bookingDate,
+        bookingTime:
+          data.slotStart && data.slotEnd ? `${data.slotStart}-${data.slotEnd}` : data.bookingTime || null,
         whatBringsToTherapy: data.whatBringsToTherapy,
         howLongConcerns: data.howLongConcerns,
         concerns: data.concerns || {},
@@ -43,24 +69,60 @@ export default function BookingPage() {
       })
 
       const entityId = bookingRes.id ?? bookingRes.bookingId
-      const paymentResult = await openRazorpayCheckout({
-        amount: data.sessionPrice,
-        receipt: `booking_${entityId}`,
-        orderType: 'booking',
+      setPendingPayment({
         entityId,
-        customerName: data.name,
-        customerEmail: data.email,
+        sessionPrice: data.sessionPrice,
+        name: data.name,
+        email: data.email,
       })
 
+      setLoadingPhase('paying')
+      const paymentResult = await runPayment(entityId, data)
+
       if (paymentResult.success) {
-        setSubmitted(true)
+        setPaymentConfirmed(true)
+        setPendingPayment(null)
       } else {
-        setError(paymentResult.message || 'Payment failed. Your booking is saved; we will contact you.')
+        setError(
+          paymentResult.message ||
+            'Payment did not complete. Your details are saved — try again when you are ready.',
+        )
       }
     } catch (err) {
-      setError(err.message || 'Failed to submit booking. Please try again.')
+      setPendingPayment(null)
+      setError(err.message || 'Could not save your booking. Please check your connection and try again.')
     } finally {
       setLoading(false)
+      setLoadingPhase(null)
+    }
+  }
+
+  const handleRetryPayment = async () => {
+    if (!pendingPayment?.entityId) return
+    setError(null)
+    setLoading(true)
+    setLoadingPhase('paying')
+    const data = {
+      sessionPrice: pendingPayment.sessionPrice,
+      name: pendingPayment.name,
+      email: pendingPayment.email,
+    }
+    try {
+      const paymentResult = await runPayment(pendingPayment.entityId, data)
+      if (paymentResult.success) {
+        setPaymentConfirmed(true)
+        setPendingPayment(null)
+      } else {
+        setError(
+          paymentResult.message ||
+            'Payment did not complete. Your booking is still pending — you can try again.',
+        )
+      }
+    } catch (err) {
+      setError(err.message || 'Could not start payment. Please try again.')
+    } finally {
+      setLoading(false)
+      setLoadingPhase(null)
     }
   }
 
@@ -72,13 +134,13 @@ export default function BookingPage() {
     )
   }
 
-  if (submitted) {
+  if (paymentConfirmed) {
     return (
       <div className="booking-page-layout">
         <div className="booking-success-card">
           <span className="booking-success-icon">✓</span>
-          <h2>Thank you for your booking!</h2>
-          <p>Our team will get in touch with you soon.</p>
+          <h2>Payment successful</h2>
+          <p>Your session is confirmed. Check your email for booking details and next steps.</p>
           <button type="button" className="btn-back-home" onClick={() => navigate('/')}>
             Back to Home
           </button>
@@ -156,8 +218,38 @@ export default function BookingPage() {
         {/* Right panel - Form */}
         <main className="booking-form-panel">
           {error && (
-            <div className="booking-error" role="alert">
-              {error}
+            <div className="booking-error-wrap">
+              <div className="booking-error" role="alert">
+                {error}
+                {pendingPayment && (
+                  <p className="booking-error-hint">
+                    Your request is saved as pending until payment completes.
+                  </p>
+                )}
+              </div>
+              {pendingPayment && (
+                <div className="booking-pending-actions">
+                  <button
+                    type="button"
+                    className="booking-retry-pay"
+                    onClick={handleRetryPayment}
+                    disabled={loading}
+                  >
+                    {loading && loadingPhase === 'paying' ? 'Opening payment…' : 'Try payment again'}
+                  </button>
+                  <button
+                    type="button"
+                    className="booking-start-over"
+                    onClick={() => {
+                      setPendingPayment(null)
+                      setError(null)
+                    }}
+                    disabled={loading}
+                  >
+                    Start over with a new booking
+                  </button>
+                </div>
+              )}
             </div>
           )}
           <BookingForm
@@ -166,6 +258,7 @@ export default function BookingPage() {
             onSubmit={handleSubmit}
             onClose={() => navigate('/')}
             loading={loading}
+            loadingPhase={loadingPhase}
           />
         </main>
       </div>

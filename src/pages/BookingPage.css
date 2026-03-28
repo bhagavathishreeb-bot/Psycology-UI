@@ -210,14 +210,80 @@
   background: rgba(245, 249, 245, 0.8);
 }
 
+.booking-error-wrap {
+  margin-bottom: 16px;
+}
+
 .booking-error {
   background: #fef2f2;
   color: #b91c1c;
   padding: 12px 16px;
   border-radius: 10px;
-  margin-bottom: 16px;
   font-size: 14px;
   border: 1px solid #fecaca;
+}
+
+.booking-error-hint {
+  margin: 10px 0 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #991b1b;
+  font-weight: 500;
+}
+
+.booking-retry-pay {
+  margin-top: 12px;
+  padding: 12px 20px;
+  width: 100%;
+  max-width: 280px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(135deg, var(--mano-primary), var(--mano-green));
+  box-shadow: 0 4px 14px rgba(123, 168, 123, 0.35);
+  transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+}
+
+.booking-retry-pay:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(123, 168, 123, 0.4);
+}
+
+.booking-retry-pay:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.booking-pending-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.booking-start-over {
+  padding: 8px 14px;
+  max-width: 280px;
+  border: 1px solid rgba(123, 168, 123, 0.45);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--mano-primary-dark);
+  background: #fff;
+  transition: background 0.15s;
+}
+
+.booking-start-over:hover:not(:disabled) {
+  background: rgba(245, 249, 245, 0.95);
+}
+
+.booking-start-over:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .booking-form-panel {
