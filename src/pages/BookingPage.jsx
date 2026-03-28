@@ -50,12 +50,6 @@ export default function BookingPage() {
         gender: data.gender,
         city: data.city,
         preferredLanguage: data.preferredLanguage,
-        preferredDate: data.bookingDate,
-        slotStart: data.slotStart,
-        slotEnd: data.slotEnd,
-        bookingDate: data.bookingDate,
-        bookingTime:
-          data.slotStart && data.slotEnd ? `${data.slotStart}-${data.slotEnd}` : data.bookingTime || null,
         whatBringsToTherapy: data.whatBringsToTherapy,
         howLongConcerns: data.howLongConcerns,
         concerns: data.concerns || {},
@@ -66,6 +60,8 @@ export default function BookingPage() {
         session: data.session,
         sessionDuration: data.sessionDuration,
         sessionPrice: data.sessionPrice,
+        appointmentDate: data.bookingDate,
+        appointmentSlotStart: data.slotStart,
       })
 
       const entityId = bookingRes.id ?? bookingRes.bookingId
