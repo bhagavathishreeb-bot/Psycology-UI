@@ -46,8 +46,8 @@ export const CONFIG = {
       type: 'Video meeting',
       title: 'Counseling Session',
       rating: 4.9,
-      price: 599,
-      originalPrice: 799,
+      price: 2500,
+      originalPrice: 3000,
       popular: true,
       description: 'A 1:1 counseling session grounded in empathy, psychological understanding, and a non-judgmental space. We will explore your thoughts, emotions, and patterns to foster self-awareness and emotional clarity.',
       whatToExpect: [
