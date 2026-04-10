@@ -106,6 +106,30 @@ function submitButtonLabel(loading, loadingPhase, fullPage) {
   return 'Please wait…'
 }
 
+function hasText(v) {
+  return typeof v === 'string' && v.trim() !== ''
+}
+
+function isBookingReadyForPayment(fd) {
+  return (
+    hasText(fd.name) &&
+    hasText(fd.email) &&
+    hasText(String(fd.age ?? '')) &&
+    hasText(fd.occupation) &&
+    hasText(fd.phone) &&
+    hasText(fd.dob) &&
+    hasText(fd.gender) &&
+    hasText(fd.city) &&
+    hasText(fd.preferredLanguage) &&
+    hasText(fd.bookingDate) &&
+    hasText(fd.slotStart) &&
+    hasText(fd.slotEnd) &&
+    hasText(fd.whatBringsToTherapy) &&
+    hasText(fd.howLongConcerns) &&
+    (fd.seenPsychologistBefore === 'Yes' || fd.seenPsychologistBefore === 'No')
+  )
+}
+
 export default function BookingForm({
   session,
   onClose,
@@ -124,6 +148,8 @@ export default function BookingForm({
     gender: '',
     bookingDate: '',
     bookingTime: '',
+    slotStart: '',
+    slotEnd: '',
     city: '',
     preferredLanguage: '',
     whatBringsToTherapy: '',
@@ -134,7 +160,6 @@ export default function BookingForm({
     previousDiagnosis: '',
     diagnosisDuration: '',
   })
-  const [receiveOnPhone, setReceiveOnPhone] = useState(true)
   const [showDiscountInput, setShowDiscountInput] = useState(false)
   const [discountCode, setDiscountCode] = useState('')
   const [slots, setSlots] = useState([])
@@ -142,6 +167,7 @@ export default function BookingForm({
   const [slotsLoading, setSlotsLoading] = useState(false)
   const [slotsFetchError, setSlotsFetchError] = useState(null)
   const [scheduleValidationError, setScheduleValidationError] = useState(null)
+  const [bookingSubmitError, setBookingSubmitError] = useState(null)
 
   useEffect(() => {
     if (!formData.bookingDate) {
@@ -183,6 +209,7 @@ export default function BookingForm({
   }, [formData.bookingDate])
 
   const handlePreferredDateChange = (e) => {
+    setBookingSubmitError(null)
     const v = e.target.value
     setFormData((prev) => ({
       ...prev,
@@ -195,6 +222,7 @@ export default function BookingForm({
   }
 
   const handleSelectSlot = (start, end) => {
+    setBookingSubmitError(null)
     setFormData((prev) => ({
       ...prev,
       slotStart: start,
@@ -207,12 +235,15 @@ export default function BookingForm({
   const sessionPrice = session?.price ?? 0
   const platformFee = 10
   const total = sessionPrice
+  const bookingDetailsComplete = isBookingReadyForPayment(formData)
 
   const update = (field, value) => {
+    setBookingSubmitError(null)
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
 
   const toggleConcern = (concern) => {
+    setBookingSubmitError(null)
     setFormData((prev) => ({
       ...prev,
       concerns: { ...prev.concerns, [concern]: !prev.concerns[concern] },
@@ -221,6 +252,15 @@ export default function BookingForm({
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    setBookingSubmitError(null)
+    if (!isBookingReadyForPayment(formData)) {
+      setBookingSubmitError(
+        fullPage
+          ? 'Please complete all required fields before payment.'
+          : 'Please complete all required fields.',
+      )
+      return
+    }
     if (
       !formData.bookingDate?.trim() ||
       !formData.slotStart?.trim() ||
@@ -263,6 +303,11 @@ export default function BookingForm({
           <h2>Complete your booking</h2>
         </div>
         <form className="booking-form booking-form-fullpage" onSubmit={handleSubmit}>
+          {bookingSubmitError && (
+            <p className="booking-submit-error" role="alert">
+              {bookingSubmitError}
+            </p>
+          )}
           <div className="form-section">
             <h3>Personal Information</h3>
             <div className="form-grid">
@@ -483,88 +528,90 @@ export default function BookingForm({
             )}
           </div>
 
-          <div className="payment-section">
-            <label className="payment-checkbox-label">
-              <input
-                type="checkbox"
-                checked={receiveOnPhone}
-                onChange={(e) => setReceiveOnPhone(e.target.checked)}
-              />
-              <span>Receive booking details on phone</span>
-            </label>
-            <button
-              type="button"
-              className="btn-discount-code"
-              onClick={() => setShowDiscountInput(!showDiscountInput)}
-            >
-              Add Discount Code
-            </button>
-            {showDiscountInput && (
-              <div className="discount-input-wrap">
-                <input
-                  type="text"
-                  value={discountCode}
-                  onChange={(e) => setDiscountCode(e.target.value)}
-                  placeholder="Enter code"
-                  className="discount-input"
-                />
-              </div>
-            )}
+          {!bookingDetailsComplete && (
+            <div className="booking-payment-gate" role="status">
+              <p>Complete all required fields above to review payment and confirm your booking.</p>
+            </div>
+          )}
 
-            <div className="order-summary-card">
-              <div className="order-summary-header">
-                <h3>Order Summary</h3>
-                <span className="order-summary-amount">₹{sessionPrice.toLocaleString('en-IN')}</span>
+          {bookingDetailsComplete && (
+            <div className="payment-section">
+              <button
+                type="button"
+                className="btn-discount-code"
+                onClick={() => setShowDiscountInput(!showDiscountInput)}
+              >
+                Add Discount Code
+              </button>
+              {showDiscountInput && (
+                <div className="discount-input-wrap">
+                  <input
+                    type="text"
+                    value={discountCode}
+                    onChange={(e) => setDiscountCode(e.target.value)}
+                    placeholder="Enter code"
+                    className="discount-input"
+                  />
+                </div>
+              )}
+
+              <div className="order-summary-card">
+                <div className="order-summary-header">
+                  <h3>Order Summary</h3>
+                  <span className="order-summary-amount">₹{sessionPrice.toLocaleString('en-IN')}</span>
+                </div>
+                <div className="order-summary-rows">
+                  <div className="order-row">
+                    <span>1 × {session?.title} ({session?.duration})</span>
+                    <span>₹{sessionPrice.toLocaleString('en-IN')}</span>
+                  </div>
+                  <div className="order-row">
+                    <span>
+                      Platform fee
+                      <span className="info-icon" title="Platform fee waived">ⓘ</span>
+                    </span>
+                    <span className="platform-fee-free">
+                      <s>₹{platformFee}</s> FREE
+                    </span>
+                  </div>
+                  <div className="order-row order-total">
+                    <span>Total</span>
+                    <span>₹{total.toLocaleString('en-IN')}</span>
+                  </div>
+                </div>
               </div>
-              <div className="order-summary-rows">
-                <div className="order-row">
-                  <span>1 × {session?.title} ({session?.duration})</span>
-                  <span>₹{sessionPrice.toLocaleString('en-IN')}</span>
-                </div>
-                <div className="order-row">
-                  <span>
-                    Platform fee
-                    <span className="info-icon" title="Platform fee waived">ⓘ</span>
-                  </span>
-                  <span className="platform-fee-free">
-                    <s>₹{platformFee}</s> FREE
-                  </span>
-                </div>
-                <div className="order-row order-total">
-                  <span>Total</span>
-                  <span>₹{total.toLocaleString('en-IN')}</span>
-                </div>
+
+              <p className="booking-pay-flow-hint">
+                We&apos;ll save your details first, then open a secure payment window to confirm your session.
+              </p>
+
+              <div className="payment-security">
+                <span className="security-icon">🔒</span>
+                <span>Payments are 100% secure & encrypted</span>
+                <span className="legal-links">
+                  <a href="/terms">Terms</a> | <a href="/privacy">Privacy</a>
+                </span>
               </div>
             </div>
-
-            <p className="booking-pay-flow-hint">
-              We&apos;ll save your details first, then open a secure payment window to confirm your session.
-            </p>
-
-            <div className="payment-security">
-              <span className="security-icon">🔒</span>
-              <span>Payments are 100% secure & encrypted</span>
-              <span className="legal-links">
-                <a href="/terms">Terms</a> | <a href="/privacy">Privacy</a>
-              </span>
-            </div>
-          </div>
+          )}
 
           <div className="form-actions form-actions-payment">
             <button type="button" className="btn-cancel" onClick={fullPage ? () => onClose?.() : onClose}>
               {fullPage ? 'Back to Home' : 'Cancel'}
             </button>
-            <div className="payment-sticky-summary">
-              <span className="payment-price">
-                ₹{total.toLocaleString('en-IN')}
-                {session?.originalPrice && (
-                  <span className="payment-original">₹{session.originalPrice.toLocaleString('en-IN')}</span>
-                )}
-              </span>
-              <button type="submit" className="btn-confirm-pay" disabled={loading}>
-                {submitButtonLabel(loading, loadingPhase, true)}
-              </button>
-            </div>
+            {bookingDetailsComplete && (
+              <div className="payment-sticky-summary">
+                <span className="payment-price">
+                  ₹{total.toLocaleString('en-IN')}
+                  {session?.originalPrice && (
+                    <span className="payment-original">₹{session.originalPrice.toLocaleString('en-IN')}</span>
+                  )}
+                </span>
+                <button type="submit" className="btn-confirm-pay" disabled={loading}>
+                  {submitButtonLabel(loading, loadingPhase, true)}
+                </button>
+              </div>
+            )}
           </div>
         </form>
       </div>
@@ -575,12 +622,17 @@ export default function BookingForm({
     <div className="booking-modal-overlay" onClick={onClose}>
       <div className="booking-modal" onClick={(e) => e.stopPropagation()}>
         <div className="booking-modal-header">
-          <h2>Book Session — {session?.title} (₹{session?.price})</h2>
+          <h2>Book Session — {session?.title}</h2>
           <button type="button" className="close-btn" onClick={onClose} aria-label="Close">
             ×
           </button>
         </div>
         <form className="booking-form" onSubmit={handleSubmit}>
+          {bookingSubmitError && (
+            <p className="booking-submit-error" role="alert">
+              {bookingSubmitError}
+            </p>
+          )}
           <div className="form-section">
             <h3>Personal Information</h3>
             <div className="form-grid">

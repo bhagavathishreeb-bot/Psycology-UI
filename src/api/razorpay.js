@@ -43,7 +43,7 @@ export async function openRazorpayCheckout({
         key: razorpayKeyId,
         amount: amount * 100,
         currency: 'INR',
-        name: 'ManoTaranga',
+        name: 'KannadaMentalHealth',
         order_id: razorpayOrderId,
         prefill: { name: customerName, email: customerEmail },
         handler: async function (response) {

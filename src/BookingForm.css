@@ -7,7 +7,7 @@
 .booking-fullpage-header {
   padding: 0 0 24px;
   margin-bottom: 28px;
-  border-bottom: 2px solid rgba(123, 168, 123, 0.2);
+  border-bottom: 2px solid rgba(91, 164, 201, 0.2);
 }
 
 .booking-fullpage-header h2 {
@@ -32,10 +32,10 @@
   margin-bottom: 24px;
   width: 100%;
   padding: 28px 32px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(253, 248, 249, 0.92) 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(247, 251, 253, 0.92) 100%);
   border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(123, 168, 123, 0.08), 0 0 0 1px rgba(232, 160, 184, 0.12);
-  border: 1px solid rgba(123, 168, 123, 0.2);
+  box-shadow: 0 4px 20px rgba(91, 164, 201, 0.08), 0 0 0 1px rgba(140, 200, 235, 0.12);
+  border: 1px solid rgba(91, 164, 201, 0.2);
 }
 
 .booking-form-fullpage .form-section label {
@@ -116,7 +116,7 @@
   justify-content: space-between;
   padding: 16px 20px;
   border-bottom: 1px solid #e8ebe8;
-  background: linear-gradient(135deg, #FADADD 0%, #F5F9F5 100%);
+  background: linear-gradient(135deg, #B8E0F2 0%, #E8F4FC 100%);
 }
 
 .booking-modal-header h2 {
@@ -168,7 +168,7 @@
   color: var(--mano-primary-dark);
   margin: 0 0 18px;
   padding-bottom: 12px;
-  border-bottom: 2px solid rgba(123, 168, 123, 0.2);
+  border-bottom: 2px solid rgba(91, 164, 201, 0.2);
   letter-spacing: -0.2px;
 }
 
@@ -225,7 +225,7 @@
 }
 
 /* Label + * on one line; input/select/textarea full width below (avoids flex column splitting text and *) */
-.booking-form label:not(.checkbox-label):not(.radio-label):not(.booking-question-label):not(.payment-checkbox-label) {
+.booking-form label:not(.checkbox-label):not(.radio-label):not(.booking-question-label) {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -234,9 +234,9 @@
   row-gap: 8px;
 }
 
-.booking-form label:not(.checkbox-label):not(.radio-label):not(.booking-question-label):not(.payment-checkbox-label) > input,
-.booking-form label:not(.checkbox-label):not(.radio-label):not(.booking-question-label):not(.payment-checkbox-label) > select,
-.booking-form label:not(.checkbox-label):not(.radio-label):not(.booking-question-label):not(.payment-checkbox-label) > textarea {
+.booking-form label:not(.checkbox-label):not(.radio-label):not(.booking-question-label) > input,
+.booking-form label:not(.checkbox-label):not(.radio-label):not(.booking-question-label) > select,
+.booking-form label:not(.checkbox-label):not(.radio-label):not(.booking-question-label) > textarea {
   flex: 1 0 100%;
   width: 100%;
   min-width: 0;
@@ -244,7 +244,7 @@
 }
 
 .booking-form label.other-concern,
-.booking-form label:not(.checkbox-label):not(.radio-label):not(.booking-question-label):not(.payment-checkbox-label) {
+.booking-form label:not(.checkbox-label):not(.radio-label):not(.booking-question-label) {
   margin-bottom: 0;
 }
 
@@ -274,7 +274,7 @@
 .booking-form select,
 .booking-form textarea {
   padding: 12px 16px;
-  border: 1px solid rgba(123, 168, 123, 0.3);
+  border: 1px solid rgba(91, 164, 201, 0.3);
   border-radius: 12px;
   font-size: 14px;
   font-family: inherit;
@@ -292,7 +292,7 @@
 .booking-form input:not([type="checkbox"]):not([type="radio"]):hover,
 .booking-form select:hover,
 .booking-form textarea:hover {
-  border-color: rgba(123, 168, 123, 0.4);
+  border-color: rgba(91, 164, 201, 0.4);
 }
 
 .booking-form input:not([type="checkbox"]):not([type="radio"]):focus,
@@ -300,7 +300,7 @@
 .booking-form textarea:focus {
   outline: none;
   border-color: var(--mano-primary);
-  box-shadow: 0 0 0 3px rgba(123, 168, 123, 0.2);
+  box-shadow: 0 0 0 3px rgba(91, 164, 201, 0.2);
 }
 
 .booking-form input[type="checkbox"],
@@ -373,7 +373,7 @@
 }
 
 .checkbox-label:hover {
-  background: rgba(245, 249, 245, 0.5);
+  background: rgba(241, 248, 252, 0.5);
 }
 
 /* Concerns: vertical list, sketch-style checkboxes; labels use same type as rest of form */
@@ -445,7 +445,7 @@
   outline: none !important;
   box-shadow:
     1px 1px 0 rgba(26, 26, 26, 0.35),
-    0 0 0 3px rgba(123, 168, 123, 0.45) !important;
+    0 0 0 3px rgba(91, 164, 201, 0.45) !important;
 }
 
 .other-concern {
@@ -477,7 +477,7 @@
 
 .booking-slot-btn {
   padding: 10px 16px;
-  border: 1px solid rgba(123, 168, 123, 0.45);
+  border: 1px solid rgba(91, 164, 201, 0.45);
   border-radius: 10px;
   background: #fff;
   font-size: 14px;
@@ -489,14 +489,14 @@
 }
 
 .booking-slot-btn:hover {
-  background: rgba(245, 249, 245, 0.9);
+  background: rgba(241, 248, 252, 0.9);
   border-color: var(--mano-primary);
 }
 
 .booking-slot-btn-selected {
-  background: linear-gradient(135deg, rgba(152, 216, 170, 0.35) 0%, rgba(245, 249, 245, 0.95) 100%);
+  background: linear-gradient(135deg, rgba(120, 200, 228, 0.35) 0%, rgba(241, 248, 252, 0.95) 100%);
   border-color: var(--mano-primary);
-  box-shadow: 0 0 0 2px rgba(123, 168, 123, 0.25);
+  box-shadow: 0 0 0 2px rgba(91, 164, 201, 0.25);
 }
 
 .booking-slots-loading,
@@ -543,7 +543,7 @@
 }
 
 .radio-label:hover {
-  background: rgba(245, 249, 245, 0.5);
+  background: rgba(241, 248, 252, 0.5);
 }
 
 .radio-label span {
@@ -566,12 +566,12 @@
 .conditional-fields {
   margin-top: 12px;
   padding: 16px;
-  background: rgba(245, 249, 245, 0.6);
+  background: rgba(241, 248, 252, 0.6);
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  border: 1px solid rgba(123, 168, 123, 0.12);
+  border: 1px solid rgba(91, 164, 201, 0.12);
 }
 
 .booking-form-fullpage .conditional-fields {
@@ -585,7 +585,7 @@
   justify-content: flex-end;
   padding-top: 28px;
   margin-top: 12px;
-  border-top: 2px solid rgba(123, 168, 123, 0.15);
+  border-top: 2px solid rgba(91, 164, 201, 0.15);
 }
 
 .booking-form-fullpage .form-actions {
@@ -595,7 +595,7 @@
 
 .btn-cancel {
   padding: 12px 24px;
-  border: 1px solid rgba(123, 168, 123, 0.3);
+  border: 1px solid rgba(91, 164, 201, 0.3);
   background: #fff;
   border-radius: 10px;
   font-size: 15px;
@@ -606,8 +606,8 @@
 }
 
 .btn-cancel:hover {
-  background: rgba(245, 249, 245, 0.8);
-  border-color: rgba(123, 168, 123, 0.4);
+  background: rgba(241, 248, 252, 0.8);
+  border-color: rgba(91, 164, 201, 0.4);
 }
 
 .btn-submit {
@@ -620,12 +620,12 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(123, 168, 123, 0.35);
+  box-shadow: 0 4px 14px rgba(91, 164, 201, 0.35);
 }
 
 .btn-submit:hover {
   background: linear-gradient(135deg, var(--mano-primary-dark) 0%, var(--mano-primary) 100%);
-  box-shadow: 0 6px 20px rgba(123, 168, 123, 0.4);
+  box-shadow: 0 6px 20px rgba(91, 164, 201, 0.4);
   transform: translateY(-1px);
 }
 
@@ -633,34 +633,42 @@
 .payment-section {
   margin-top: 28px;
   padding: 28px 32px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(253, 248, 249, 0.95) 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(247, 251, 253, 0.95) 100%);
   border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(123, 168, 123, 0.1), 0 0 0 1px rgba(232, 160, 184, 0.15);
-  border: 1px solid rgba(123, 168, 123, 0.2);
+  box-shadow: 0 4px 20px rgba(91, 164, 201, 0.1), 0 0 0 1px rgba(140, 200, 235, 0.15);
+  border: 1px solid rgba(91, 164, 201, 0.2);
 }
 
-.payment-checkbox-label {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-  margin-bottom: 16px;
+.booking-submit-error {
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(140, 200, 235, 0.2);
+  border: 1px solid rgba(140, 200, 235, 0.55);
+  color: var(--mano-primary-dark);
   font-size: 14px;
-  font-weight: 500;
-  color: var(--mano-text);
+  line-height: 1.45;
 }
 
-.payment-checkbox-label input {
-  width: 20px;
-  height: 20px;
-  accent-color: var(--mano-primary);
+.booking-payment-gate {
+  margin-top: 24px;
+  padding: 18px 20px;
+  border-radius: 12px;
+  background: rgba(241, 248, 252, 0.85);
+  border: 1px dashed rgba(91, 164, 201, 0.45);
+}
+
+.booking-payment-gate p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--mano-text-muted);
 }
 
 .btn-discount-code {
   padding: 12px 20px;
-  border: 2px dashed rgba(123, 168, 123, 0.4);
-  background: rgba(245, 249, 245, 0.6);
+  border: 2px dashed rgba(91, 164, 201, 0.4);
+  background: rgba(241, 248, 252, 0.6);
   border-radius: 10px;
   font-size: 14px;
   font-weight: 500;
@@ -671,7 +679,7 @@
 }
 
 .btn-discount-code:hover {
-  background: rgba(184, 224, 210, 0.4);
+  background: rgba(200, 230, 248, 0.4);
   border-color: var(--mano-primary);
 }
 
@@ -681,7 +689,7 @@
 
 .discount-input {
   padding: 12px 16px;
-  border: 1px solid rgba(123, 168, 123, 0.3);
+  border: 1px solid rgba(91, 164, 201, 0.3);
   border-radius: 10px;
   font-size: 14px;
   width: 100%;
@@ -693,8 +701,8 @@
   background: #fff;
   border-radius: 14px;
   padding: 24px;
-  box-shadow: 0 2px 12px rgba(123, 168, 123, 0.08);
-  border: 1px solid rgba(184, 224, 210, 0.5);
+  box-shadow: 0 2px 12px rgba(91, 164, 201, 0.08);
+  border: 1px solid rgba(200, 230, 248, 0.5);
   margin-bottom: 20px;
 }
 
@@ -704,7 +712,7 @@
   align-items: center;
   margin-bottom: 20px;
   padding-bottom: 16px;
-  border-bottom: 2px solid rgba(123, 168, 123, 0.2);
+  border-bottom: 2px solid rgba(91, 164, 201, 0.2);
 }
 
 .order-summary-header h3 {
@@ -773,7 +781,7 @@
   color: var(--mano-primary-dark);
   padding-top: 16px;
   margin-top: 8px;
-  border-top: 2px solid rgba(123, 168, 123, 0.2);
+  border-top: 2px solid rgba(91, 164, 201, 0.2);
 }
 
 .booking-pay-flow-hint {
@@ -784,7 +792,7 @@
   color: var(--mano-text-muted);
   background: rgba(255, 255, 255, 0.65);
   border-radius: 10px;
-  border: 1px dashed rgba(123, 168, 123, 0.35);
+  border: 1px dashed rgba(91, 164, 201, 0.35);
 }
 
 .payment-security {
@@ -793,11 +801,11 @@
   gap: 10px;
   flex-wrap: wrap;
   padding: 14px 18px;
-  background: linear-gradient(135deg, rgba(245, 249, 245, 0.8) 0%, rgba(250, 218, 221, 0.4) 100%);
+  background: linear-gradient(135deg, rgba(241, 248, 252, 0.8) 0%, rgba(200, 235, 245, 0.4) 100%);
   border-radius: 12px;
   font-size: 13px;
   color: var(--mano-text-muted);
-  border: 1px solid rgba(123, 168, 123, 0.15);
+  border: 1px solid rgba(91, 164, 201, 0.15);
 }
 
 .security-icon {
@@ -856,12 +864,12 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 16px rgba(123, 168, 123, 0.4);
+  box-shadow: 0 4px 16px rgba(91, 164, 201, 0.4);
 }
 
 .btn-confirm-pay:hover {
   background: linear-gradient(135deg, var(--mano-primary-dark) 0%, var(--mano-primary) 100%);
-  box-shadow: 0 6px 20px rgba(123, 168, 123, 0.45);
+  box-shadow: 0 6px 20px rgba(91, 164, 201, 0.45);
   transform: translateY(-2px);
 }
 

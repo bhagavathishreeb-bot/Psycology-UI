@@ -10,7 +10,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className="manotaranga-app">
+    <div className="kannada-mental-health-app">
       <aside className="sidebar">
         <div className="sidebar-content">
           <div className="profile-header">
@@ -71,15 +71,18 @@ export default function HomePage() {
               <article key={session.id} className="session-card">
                 <div className="session-meta">
                   <span className="session-type">{session.type} · {session.duration}</span>
-                  <span className="session-rating">★ {session.rating}</span>
+                  <span className="session-meta-trailing">
+                    {session.popular && <span className="popular-tag">Popular</span>}
+                    <span className="session-rating">★ {session.rating}</span>
+                  </span>
                 </div>
                 <h3 className="session-title">{session.title}</h3>
-                <div className="session-pricing">
-                  <span className="current-price">₹{session.price.toLocaleString('en-IN')}</span>
-                  {session.popular && <span className="popular-tag">Popular</span>}
-                </div>
-                <button className="book-btn" onClick={() => handleBookSession(session)} aria-label={`Book ${session.title}`}>
-                  →
+                <button
+                  type="button"
+                  className="book-now-btn"
+                  onClick={() => handleBookSession(session)}
+                >
+                  Book now
                 </button>
               </article>
             ))}

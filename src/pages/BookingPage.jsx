@@ -163,10 +163,6 @@ export default function BookingPage() {
             </div>
           </div>
           <div className="session-price-row">
-            <span className="price-current">₹{session.price}</span>
-            {session.originalPrice && (
-              <span className="price-original">₹{session.originalPrice}</span>
-            )}
             <span className="session-duration">
               <span className="duration-icon">🕐</span> {session.duration}
             </span>

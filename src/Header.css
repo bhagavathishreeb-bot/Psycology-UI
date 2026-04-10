@@ -3,9 +3,9 @@
   align-items: center;
   justify-content: space-between;
   padding: 14px 36px;
-  background: linear-gradient(135deg, #fff 0%, #FDF8F9 50%, #F5F9F5 100%);
-  border-bottom: 1px solid rgba(184, 224, 210, 0.5);
-  box-shadow: 0 4px 24px rgba(123, 168, 123, 0.06);
+  background: linear-gradient(135deg, #ffffff 0%, #fffbeb 42%, #e8f4fa 100%);
+  border-bottom: 1px solid rgba(212, 232, 240, 0.9);
+  box-shadow: 0 4px 24px rgba(91, 164, 201, 0.08);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -35,8 +35,8 @@
   background: #fff;
   border: 3px solid var(--mano-pink-light);
   box-shadow:
-    0 4px 12px rgba(232, 160, 184, 0.2),
-    0 0 0 1px rgba(184, 224, 210, 0.5);
+    0 4px 12px rgba(91, 164, 201, 0.18),
+    0 0 0 1px rgba(237, 214, 130, 0.4);
   padding: 0;
 }
 
@@ -52,7 +52,7 @@
   font-size: 26px;
   font-weight: 700;
   letter-spacing: 0.5px;
-  background: linear-gradient(135deg, #5d9a5d 0%, #7BA87B 35%, #98D8AA 70%, #E8A0B8 100%);
+  background: linear-gradient(135deg, #3d8ab5 0%, #5ba4c9 38%, #e8c547 72%, #edd978 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -72,7 +72,7 @@
 .nav-link {
   padding: 10px 20px;
   text-decoration: none;
-  color: #6b7a6b;
+  color: var(--mano-text-muted);
   font-size: 15px;
   font-weight: 600;
   border-radius: 8px;
@@ -80,13 +80,13 @@
 }
 
 .nav-link:hover {
-  color: #7BA87B;
-  background: rgba(184, 224, 210, 0.5);
+  color: var(--mano-primary-dark);
+  background: rgba(255, 251, 235, 0.95);
 }
 
 .nav-link.active {
-  color: #7BA87B;
-  background: rgba(184, 224, 210, 0.6);
+  color: var(--mano-primary-dark);
+  background: rgba(91, 164, 201, 0.15);
 }
 
 .nav-link-coming-soon {
@@ -101,14 +101,14 @@
   top: -8px;
   left: 50%;
   transform: translateX(-50%);
-  background: linear-gradient(135deg, #E8A0B8 0%, #7BA87B 100%);
+  background: linear-gradient(135deg, #5ba4c9 0%, #e8c547 100%);
   color: white;
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.5px;
   padding: 4px 10px;
   border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(123, 168, 123, 0.4);
+  box-shadow: 0 2px 10px rgba(91, 164, 201, 0.35);
   white-space: nowrap;
 }
 

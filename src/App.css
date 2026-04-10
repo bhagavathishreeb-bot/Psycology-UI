@@ -1,39 +1,38 @@
-/* ManoTaranga - Mental Wellness Brand */
+/* KannadaMentalHealth — pastel blue & pastel yellow */
 .app-wrapper {
   min-height: 100vh;
 }
 :root {
-  /* Pastel Pink & Green Theme */
-  --mano-primary: #7BA87B;
-  --mano-primary-dark: #5d9a5d;
-  --mano-accent: #E8A0B8;
-  --mano-pink: #FADADD;
-  --mano-pink-light: #FCE4EC;
-  --mano-pink-deep: #F8B4C4;
-  --mano-green: #98D8AA;
-  --mano-green-light: #B8E0D2;
-  --mano-green-pale: #C7F0DB;
-  --mano-sidebar-bg: #F5F9F5;
-  --mano-main-bg: #FDF8F9;
+  --mano-primary: #5ba4c9;
+  --mano-primary-dark: #3d8ab5;
+  --mano-accent: #e8c547;
+  --mano-pink: #fff1b8;
+  --mano-pink-light: #fffbeb;
+  --mano-pink-deep: #edd978;
+  --mano-green: #7ec8e3;
+  --mano-green-light: #b8e0f2;
+  --mano-green-pale: #e8f4fa;
+  --mano-sidebar-bg: #f3f9fc;
+  --mano-main-bg: #f7fbfd;
   --mano-card-bg: #ffffff;
-  --mano-text: #3d4a3d;
-  --mano-text-muted: #6b7a6b;
-  --mano-border: #e8ebe8;
-  --mano-shadow: 0 4px 20px rgba(123, 168, 123, 0.1);
-  --mano-shadow-hover: 0 8px 30px rgba(123, 168, 123, 0.15);
+  --mano-text: #2c4a5e;
+  --mano-text-muted: #6b8294;
+  --mano-border: #d4e8f0;
+  --mano-shadow: 0 4px 22px rgba(91, 164, 201, 0.12);
+  --mano-shadow-hover: 0 10px 34px rgba(91, 164, 201, 0.18);
 }
 
 * {
   box-sizing: border-box;
 }
 
-.manotaranga-app {
+.kannada-mental-health-app {
   display: flex;
   min-height: 100vh;
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
   color: var(--mano-text);
   background-image:
-    linear-gradient(rgba(253, 248, 249, 0.88), rgba(245, 249, 245, 0.9)),
+    linear-gradient(rgba(255, 252, 245, 0.9), rgba(241, 248, 252, 0.92)),
     url(/ManoTaranga.jpeg);
   background-size: cover;
   background-position: center;
@@ -45,7 +44,7 @@
 .sidebar {
   width: 380px;
   min-width: 320px;
-  background: rgba(245, 249, 245, 0.92);
+  background: rgba(243, 249, 252, 0.94);
   padding: 40px 32px;
   display: flex;
   flex-direction: column;
@@ -73,9 +72,9 @@
   border-radius: 50%;
   border: 4px solid var(--mano-pink-light);
   box-shadow:
-    0 0 0 1px rgba(232, 160, 184, 0.3),
-    0 4px 16px rgba(123, 168, 123, 0.25),
-    0 8px 32px rgba(123, 168, 123, 0.15);
+    0 0 0 1px rgba(237, 214, 130, 0.45),
+    0 4px 16px rgba(91, 164, 201, 0.22),
+    0 8px 28px rgba(232, 197, 90, 0.14);
 }
 
 .profile-image {
@@ -93,7 +92,7 @@
   right: 4px;
   width: 28px;
   height: 28px;
-  background: linear-gradient(135deg, #f59e0b, #d97706);
+  background: linear-gradient(135deg, #e8c547, #5ba4c9);
   color: white;
   border-radius: 50%;
   display: flex;
@@ -234,19 +233,19 @@
 .badge-trusted {
   background: linear-gradient(135deg, var(--mano-green) 0%, var(--mano-primary) 100%);
   color: white;
-  box-shadow: 0 4px 12px rgba(123, 168, 123, 0.4);
+  box-shadow: 0 4px 14px rgba(91, 164, 201, 0.35);
 }
 
 .badge-elite {
-  background: linear-gradient(135deg, var(--mano-pink-deep) 0%, var(--mano-accent) 100%);
-  color: white;
-  box-shadow: 0 4px 12px rgba(232, 160, 184, 0.4);
+  background: linear-gradient(135deg, var(--mano-accent) 0%, var(--mano-pink-deep) 100%);
+  color: #2c4a5e;
+  box-shadow: 0 4px 14px rgba(232, 197, 90, 0.35);
 }
 
 .badge-popular {
-  background: linear-gradient(135deg, var(--mano-green) 0%, var(--mano-primary-dark) 100%);
-  color: white;
-  box-shadow: 0 4px 12px rgba(123, 168, 123, 0.4);
+  background: linear-gradient(135deg, var(--mano-accent) 0%, var(--mano-primary-dark) 100%);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(91, 164, 201, 0.35);
 }
 
 .badge-more {
@@ -307,7 +306,7 @@
 .main-content {
   flex: 1;
   padding: 40px 48px 60px;
-  background: rgba(253, 248, 249, 0.75);
+  background: rgba(255, 252, 247, 0.75);
   overflow-y: auto;
 }
 
@@ -355,15 +354,15 @@
   border-radius: 12px;
   color: var(--mano-primary-dark);
   transition: all 0.25s ease;
-  box-shadow: 0 2px 8px rgba(123, 168, 123, 0.08);
+  box-shadow: 0 2px 10px rgba(91, 164, 201, 0.12);
 }
 
 .social-icons a:hover {
-  background: linear-gradient(135deg, var(--mano-pink) 0%, var(--mano-pink-light) 100%);
-  color: var(--mano-primary);
-  border-color: var(--mano-accent);
+  background: linear-gradient(135deg, var(--mano-pink-light) 0%, var(--mano-pink) 100%);
+  color: var(--mano-primary-dark);
+  border-color: var(--mano-primary);
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(232, 160, 184, 0.2);
+  box-shadow: 0 4px 18px rgba(232, 197, 90, 0.28);
 }
 
 .social-icons svg {
@@ -372,12 +371,12 @@
 }
 
 .about-card {
-  background: linear-gradient(145deg, #ffffff 0%, rgba(248, 252, 249, 0.98) 100%);
+  background: linear-gradient(145deg, #ffffff 0%, rgba(232, 244, 250, 0.95) 100%);
   border-radius: 20px;
   padding: 32px 36px;
-  box-shadow: 0 4px 24px rgba(123, 168, 123, 0.12), 0 1px 3px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(123, 168, 123, 0.2);
-  border-left: 4px solid var(--mano-primary);
+  box-shadow: 0 4px 26px rgba(91, 164, 201, 0.12), 0 1px 3px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(91, 164, 201, 0.2);
+  border-left: 4px solid var(--mano-accent);
 }
 
 .about-text {
@@ -435,6 +434,14 @@
   margin-bottom: 12px;
 }
 
+.session-meta-trailing {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
 .session-type {
   font-size: 13px;
   color: var(--mano-text-muted);
@@ -479,28 +486,29 @@
   font-weight: 600;
   padding: 4px 10px;
   border-radius: 6px;
-  background: linear-gradient(135deg, var(--mano-green), var(--mano-primary));
-  color: white;
+  background: linear-gradient(135deg, var(--mano-accent), var(--mano-primary));
+  color: #2c4a5e;
 }
 
-.book-btn {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: var(--mano-primary);
-  color: white;
+.book-now-btn {
+  width: 100%;
+  margin-top: 4px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--mano-primary) 0%, var(--mano-primary-dark) 55%, var(--mano-accent) 100%);
+  color: #fff;
   border: none;
-  font-size: 20px;
+  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s, transform 0.2s;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 16px rgba(91, 164, 201, 0.35);
 }
 
-.book-btn:hover {
-  background: var(--mano-primary);
-  transform: scale(1.05);
+.book-now-btn:hover {
+  background: linear-gradient(135deg, var(--mano-primary-dark) 0%, var(--mano-primary) 50%, #f0d875 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(91, 164, 201, 0.42);
 }
 
 /* Ratings Section */
@@ -620,7 +628,7 @@
 }
 
 .carousel-dot:hover {
-  background: rgba(123, 168, 123, 0.3);
+  background: rgba(232, 197, 90, 0.45);
 }
 
 .carousel-dot.active {
@@ -652,7 +660,7 @@
 }
 
 .review-stars {
-  color: #f59e0b;
+  color: #e8c547;
   font-size: 16px;
   letter-spacing: 1px;
 }
@@ -684,7 +692,7 @@
 
 /* Responsive */
 @media (max-width: 900px) {
-  .manotaranga-app {
+  .kannada-mental-health-app {
     flex-direction: column;
   }
 

@@ -6,7 +6,7 @@
   align-items: stretch;
   overflow-x: hidden;
   background-image:
-    linear-gradient(rgba(253, 248, 249, 0.88), rgba(245, 249, 245, 0.9)),
+    linear-gradient(rgba(255, 252, 245, 0.9), rgba(241, 248, 252, 0.92)),
     url(/ManoTaranga.jpeg);
   background-size: cover;
   background-position: center;
@@ -34,8 +34,8 @@
   background: rgba(255, 255, 255, 0.95);
   border-radius: 20px;
   padding: 28px 32px;
-  box-shadow: 0 4px 24px rgba(123, 168, 123, 0.12);
-  border: 1px solid rgba(123, 168, 123, 0.2);
+  box-shadow: 0 4px 24px rgba(91, 164, 201, 0.12);
+  border: 1px solid rgba(91, 164, 201, 0.2);
   position: sticky;
   top: 24px;
 }
@@ -90,9 +90,9 @@
   overflow: hidden;
   border: 3px solid var(--mano-pink-light);
   box-shadow:
-    0 0 0 1px rgba(232, 160, 184, 0.3),
-    0 4px 12px rgba(123, 168, 123, 0.25),
-    0 6px 20px rgba(123, 168, 123, 0.15);
+    0 0 0 1px rgba(140, 200, 235, 0.3),
+    0 4px 12px rgba(91, 164, 201, 0.25),
+    0 6px 20px rgba(91, 164, 201, 0.15);
   flex-shrink: 0;
 }
 
@@ -170,10 +170,10 @@
 }
 
 .testimonial-card {
-  background: rgba(245, 249, 245, 0.6);
+  background: rgba(241, 248, 252, 0.6);
   border-radius: 12px;
   padding: 16px;
-  border: 1px solid rgba(123, 168, 123, 0.15);
+  border: 1px solid rgba(91, 164, 201, 0.15);
 }
 
 .testimonial-text {
@@ -197,7 +197,7 @@
 .testimonial-nav button {
   width: 36px;
   height: 36px;
-  border: 1px solid rgba(123, 168, 123, 0.3);
+  border: 1px solid rgba(91, 164, 201, 0.3);
   background: #fff;
   border-radius: 8px;
   cursor: pointer;
@@ -207,7 +207,7 @@
 }
 
 .testimonial-nav button:hover {
-  background: rgba(245, 249, 245, 0.8);
+  background: rgba(241, 248, 252, 0.8);
 }
 
 .booking-error-wrap {
@@ -243,13 +243,13 @@
   cursor: pointer;
   color: #fff;
   background: linear-gradient(135deg, var(--mano-primary), var(--mano-green));
-  box-shadow: 0 4px 14px rgba(123, 168, 123, 0.35);
+  box-shadow: 0 4px 14px rgba(91, 164, 201, 0.35);
   transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
 }
 
 .booking-retry-pay:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(123, 168, 123, 0.4);
+  box-shadow: 0 6px 18px rgba(91, 164, 201, 0.4);
 }
 
 .booking-retry-pay:disabled {
@@ -267,7 +267,7 @@
 .booking-start-over {
   padding: 8px 14px;
   max-width: 280px;
-  border: 1px solid rgba(123, 168, 123, 0.45);
+  border: 1px solid rgba(91, 164, 201, 0.45);
   border-radius: 10px;
   font-size: 14px;
   font-weight: 600;
@@ -278,7 +278,7 @@
 }
 
 .booking-start-over:hover:not(:disabled) {
-  background: rgba(245, 249, 245, 0.95);
+  background: rgba(241, 248, 252, 0.95);
 }
 
 .booking-start-over:disabled {
@@ -287,11 +287,11 @@
 }
 
 .booking-form-panel {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(253, 248, 249, 0.95) 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(247, 251, 253, 0.95) 100%);
   border-radius: 20px;
   padding: 32px 36px;
-  box-shadow: 0 8px 32px rgba(123, 168, 123, 0.12), 0 0 0 1px rgba(232, 160, 184, 0.15);
-  border: 1px solid rgba(123, 168, 123, 0.25);
+  box-shadow: 0 8px 32px rgba(91, 164, 201, 0.12), 0 0 0 1px rgba(140, 200, 235, 0.15);
+  border: 1px solid rgba(91, 164, 201, 0.25);
 }
 
 
@@ -303,8 +303,8 @@
   text-align: center;
   max-width: 420px;
   align-self: center;
-  box-shadow: 0 4px 24px rgba(123, 168, 123, 0.12);
-  border: 1px solid rgba(123, 168, 123, 0.2);
+  box-shadow: 0 4px 24px rgba(91, 164, 201, 0.12);
+  border: 1px solid rgba(91, 164, 201, 0.2);
   border-left: 4px solid var(--mano-primary);
 }
 

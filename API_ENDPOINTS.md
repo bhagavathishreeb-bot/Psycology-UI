@@ -1,4 +1,4 @@
-# ManoTaranga Backend API Endpoints
+# KannadaMentalHealth Backend API Endpoints
 
 This document lists all API endpoints. The frontend is now integrated with these endpoints.
 

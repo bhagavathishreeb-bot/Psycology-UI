@@ -1,7 +1,7 @@
 .shop-page {
   min-height: calc(100vh - 80px);
   background-image:
-    linear-gradient(rgba(253, 248, 249, 0.88), rgba(245, 249, 245, 0.9)),
+    linear-gradient(rgba(255, 252, 245, 0.9), rgba(241, 248, 252, 0.92)),
     url(/ManoTaranga.jpeg);
   background-size: cover;
   background-position: center;
@@ -42,13 +42,13 @@
   background: #fff;
   border-radius: 16px;
   overflow: visible;
-  box-shadow: 0 4px 20px rgba(123, 168, 123, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 20px rgba(91, 164, 201, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
   border: 1px solid rgba(229, 229, 231, 0.8);
   transition: box-shadow 0.3s ease, transform 0.2s ease;
 }
 
 .shop-card:hover {
-  box-shadow: 0 12px 40px rgba(123, 168, 123, 0.15);
+  box-shadow: 0 12px 40px rgba(91, 164, 201, 0.15);
   transform: translateY(-2px);
 }
 
@@ -56,7 +56,7 @@
   height: 180px;
   overflow: hidden;
   border-radius: 16px 16px 0 0;
-  background: linear-gradient(145deg, #B8E0D2 0%, #FADADD 100%);
+  background: linear-gradient(145deg, #80DEEA 0%, #B8E0F2 100%);
 }
 
 .shop-card-img {
@@ -72,7 +72,7 @@
 .shop-type {
   font-size: 12px;
   font-weight: 600;
-  color: #7BA87B;
+  color: #5BA4C9;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 8px;
@@ -97,8 +97,8 @@
 .shop-price {
   font-size: 22px;
   font-weight: 700;
-  color: #7BA87B;
-  text-shadow: 0 2px 4px rgba(123, 168, 123, 0.2);
+  color: #5BA4C9;
+  text-shadow: 0 2px 4px rgba(91, 164, 201, 0.2);
 }
 
 .shop-original {
@@ -110,7 +110,7 @@
 .shop-btn {
   width: 100%;
   padding: 14px;
-  background: linear-gradient(135deg, #7BA87B 0%, #98D8AA 100%);
+  background: linear-gradient(135deg, #5BA4C9 0%, #7EC8E3 100%);
   color: white;
   border: none;
   border-radius: 10px;
@@ -118,7 +118,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 14px rgba(123, 168, 123, 0.35);
+  box-shadow: 0 4px 14px rgba(91, 164, 201, 0.35);
   position: relative;
   overflow: hidden;
 }
@@ -143,7 +143,7 @@
 
 .shop-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(123, 168, 123, 0.45);
+  box-shadow: 0 6px 20px rgba(91, 164, 201, 0.45);
 }
 
 .shop-btn:hover::before {
@@ -156,13 +156,13 @@
   top: 16px;
   right: -36px;
   transform: rotate(45deg);
-  background: linear-gradient(135deg, #E8A0B8 0%, #7BA87B 100%);
+  background: linear-gradient(135deg, #7EC8E3 0%, #5BA4C9 100%);
   color: white;
   padding: 8px 44px;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.5px;
-  box-shadow: 0 3px 12px rgba(123, 168, 123, 0.4);
+  box-shadow: 0 3px 12px rgba(91, 164, 201, 0.4);
   z-index: 20;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }

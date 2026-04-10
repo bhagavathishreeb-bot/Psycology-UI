@@ -7,7 +7,7 @@
 .job-fullpage-header {
   padding: 0 0 20px;
   margin-bottom: 24px;
-  border-bottom: 2px solid rgba(123, 168, 123, 0.25);
+  border-bottom: 2px solid rgba(91, 164, 201, 0.25);
 }
 
 .job-fullpage-header h2 {
@@ -30,8 +30,8 @@
   padding: 24px 28px;
   background: rgba(255, 255, 255, 0.85);
   border-radius: 14px;
-  box-shadow: 0 2px 12px rgba(123, 168, 123, 0.08);
-  border: 1px solid rgba(123, 168, 123, 0.15);
+  box-shadow: 0 2px 12px rgba(91, 164, 201, 0.08);
+  border: 1px solid rgba(91, 164, 201, 0.15);
 }
 
 .job-form-fullpage .job-form-section label {
@@ -116,7 +116,7 @@
   justify-content: space-between;
   padding: 20px 24px;
   border-bottom: 1px solid #e8ebe8;
-  background: linear-gradient(135deg, #FADADD 0%, #F5F9F5 100%);
+  background: linear-gradient(135deg, #B8E0F2 0%, #E8F4FC 100%);
 }
 
 .job-modal-header h2 {
@@ -167,7 +167,7 @@
   color: var(--mano-primary-dark);
   margin: 0 0 16px;
   padding-bottom: 10px;
-  border-bottom: 1px solid rgba(123, 168, 123, 0.25);
+  border-bottom: 1px solid rgba(91, 164, 201, 0.25);
   letter-spacing: -0.2px;
 }
 
@@ -208,7 +208,7 @@
 .job-form input[type="url"],
 .job-form textarea {
   padding: 12px 14px;
-  border: 1px solid rgba(123, 168, 123, 0.25);
+  border: 1px solid rgba(91, 164, 201, 0.25);
   border-radius: 10px;
   font-size: 14px;
   font-family: inherit;
@@ -219,14 +219,14 @@
 
 .job-form input:hover,
 .job-form textarea:hover {
-  border-color: rgba(123, 168, 123, 0.4);
+  border-color: rgba(91, 164, 201, 0.4);
 }
 
 .job-form input:focus,
 .job-form textarea:focus {
   outline: none;
   border-color: var(--mano-primary);
-  box-shadow: 0 0 0 3px rgba(123, 168, 123, 0.2);
+  box-shadow: 0 0 0 3px rgba(91, 164, 201, 0.2);
 }
 
 .job-form textarea {
@@ -265,9 +265,9 @@
   align-items: center;
   gap: 8px;
   padding: 14px 20px;
-  border: 2px dashed rgba(123, 168, 123, 0.4);
+  border: 2px dashed rgba(91, 164, 201, 0.4);
   border-radius: 12px;
-  background: rgba(245, 249, 245, 0.8);
+  background: rgba(241, 248, 252, 0.8);
   color: var(--mano-text-muted);
   font-size: 14px;
   transition: all 0.2s ease;
@@ -275,7 +275,7 @@
 
 .job-file-label:hover .job-file-placeholder {
   border-color: var(--mano-primary);
-  background: rgba(123, 168, 123, 0.06);
+  background: rgba(91, 164, 201, 0.06);
 }
 
 .job-form-actions {
@@ -284,7 +284,7 @@
   justify-content: flex-end;
   padding-top: 24px;
   margin-top: 24px;
-  border-top: 1px solid rgba(123, 168, 123, 0.2);
+  border-top: 1px solid rgba(91, 164, 201, 0.2);
 }
 
 .job-form-fullpage .job-form-actions {
@@ -317,12 +317,12 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(123, 168, 123, 0.35);
+  box-shadow: 0 4px 14px rgba(91, 164, 201, 0.35);
 }
 
 .job-btn-submit:hover {
   background: linear-gradient(135deg, var(--mano-primary-dark) 0%, var(--mano-primary) 100%);
-  box-shadow: 0 6px 20px rgba(123, 168, 123, 0.4);
+  box-shadow: 0 6px 20px rgba(91, 164, 201, 0.4);
   transform: translateY(-1px);
 }
 
@@ -342,7 +342,7 @@
   justify-content: center;
   width: 56px;
   height: 56px;
-  background: linear-gradient(135deg, #98D8AA 0%, #7BA87B 100%);
+  background: linear-gradient(135deg, #7EC8E3 0%, #5BA4C9 100%);
   color: white;
   font-size: 28px;
   font-weight: 700;

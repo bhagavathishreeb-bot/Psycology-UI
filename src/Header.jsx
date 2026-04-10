@@ -6,9 +6,9 @@ export default function Header() {
     <header className="app-header">
       <NavLink to="/" className="header-logo">
         <div className="header-logo-icon">
-          <img src="/ManoTaranga.jpeg" alt="ManoTaranga" />
+          <img src="/ManoTaranga.jpeg" alt="KannadaMentalHealth" />
         </div>
-        <span className="header-brand-name">ManoTaranga</span>
+        <span className="header-brand-name">KannadaMentalHealth</span>
       </NavLink>
       <nav className="header-nav">
         <NavLink to="/" end className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
